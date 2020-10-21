@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+    <span>{{ goal.name }}</span>
+    <span>{{ goal.type }}</span>
+  </mat-card-title>
+  <mat-card-content>
+    <div>
+      {{ goal.done }} / {{ goal.total }}
+    </div>
+    <div>
+      {{ goal.frequency }}
+    </div>
+  </mat-card-content>
+</mat-card>
