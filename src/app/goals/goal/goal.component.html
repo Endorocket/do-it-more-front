@@ -1,7 +1,10 @@
 <mat-card>
   <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
     <span>{{ goal.name }}</span>
-    <span>{{ goal.type }}</span>
+    <span>
+      <span>{{ goal.points }}</span>
+      <img [src]="goal.type.iconPath" [alt]="goal.type" height="30" width="30">
+    </span>
   </mat-card-title>
   <mat-card-content>
     <div>

@@ -11,6 +11,7 @@ import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { GoalsComponent } from './goals/goals.component';
 import { GoalComponent } from './goals/goal/goal.component';
+import { CharacterComponent } from './goals/character/character.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GoalComponent } from './goals/goal/goal.component';
     SidenavComponent,
     WelcomeComponent,
     GoalsComponent,
-    GoalComponent
+    GoalComponent,
+    CharacterComponent
   ],
   imports: [
     BrowserModule,

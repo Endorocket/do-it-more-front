@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
+    <span>{{ character.name }}</span>
+  </mat-card-title>
+  <mat-card-content>
+    <div>
+      <div>
+        <img src="/assets/images/fox.png" alt="avatar" height="150" width="125">
+      </div>
+      <div>
+      {{ character.level }}
+      </div>
+      <div>
+        <span>poziom</span>
+      </div>
+    </div>
+    <div>
+      <div *ngFor="let progress of character.progresses">
+        <img [src]="progress.type.iconPath" [alt]="progress.type" height="30" width="30">
+        {{ progress.done }} / {{ progress.total }}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+

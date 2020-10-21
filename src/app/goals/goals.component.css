@@ -1,6 +1,10 @@
+#goals-section {
+  padding: 30px;
+}
+
 app-goal {
   display: inline-block;
-  padding: 20px 10px;
+  padding: 0 0 10px 10px;
   width: 350px;
   height: 200px;
 }
