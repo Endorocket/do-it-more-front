@@ -4,7 +4,7 @@ import { GoalType } from './goal-type.enum';
 export interface Goal {
   name: string;
   frequency: Frequency;
-  done: number;
+  done?: number;
   total: number;
   type: GoalType;
   points: number;

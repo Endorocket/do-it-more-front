@@ -1,4 +1,4 @@
-import { GoalType } from '../model/goal-type.enum';
+import { GoalType } from './goal-type.enum';
 
 export interface Character {
   name: string;

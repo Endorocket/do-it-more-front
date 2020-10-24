@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Goal } from './model/goal.model';
-import { Frequency } from './model/frequency.enum';
-import { GoalType } from './model/goal-type.enum';
+import { Goal } from '../model/goal.model';
+import { Frequency } from '../model/frequency.enum';
+import { GoalType } from '../model/goal-type.enum';
 
 @Injectable({providedIn: 'root'})
 export class GoalsService {

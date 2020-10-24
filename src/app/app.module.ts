@@ -12,6 +12,11 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { GoalsComponent } from './goals/goals.component';
 import { GoalComponent } from './goals/goal/goal.component';
 import { CharacterComponent } from './goals/character/character.component';
+import { FriendsComponent } from './friends/friends.component';
+import { SharedGoalsComponent } from './friends/shared-goals/shared-goals.component';
+import { FriendsListComponent } from './friends/friends-list/friends-list.component';
+import { FriendsItemComponent } from './friends/friends-list/friends-item/friends-item.component';
+import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-goal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { CharacterComponent } from './goals/character/character.component';
     WelcomeComponent,
     GoalsComponent,
     GoalComponent,
-    CharacterComponent
+    CharacterComponent,
+    FriendsComponent,
+    SharedGoalsComponent,
+    FriendsListComponent,
+    FriendsItemComponent,
+    SharedGoalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Character } from './character.model';
-import { GoalType } from '../model/goal-type.enum';
+import { Character } from '../../model/character.model';
+import { GoalType } from '../../model/goal-type.enum';
 
 @Injectable({providedIn: 'root'})
 export class CharacterService {

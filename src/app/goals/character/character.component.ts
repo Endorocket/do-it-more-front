@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from './character.model';
+import { Character } from '../../model/character.model';
 import { CharacterService } from './character.service';
 
 @Component({
