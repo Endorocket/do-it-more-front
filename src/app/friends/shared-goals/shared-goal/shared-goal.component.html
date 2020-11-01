@@ -2,7 +2,7 @@
   <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
     <span>{{ sharedGoal.goal.name }}</span>
     <span>
-      <span>{{ sharedGoal.goal.points }}</span>
+      <span>{{ sharedGoal.goal.points | points }}</span>
       <img [src]="sharedGoal.goal.type.iconPath" [alt]="sharedGoal.goal.type" height="30" width="30">
     </span>
   </mat-card-title>

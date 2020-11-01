@@ -19,6 +19,7 @@ import { FriendsItemComponent } from './friends/friends-list/friends-item/friend
 import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-goal.component';
 import { NewGoalComponent } from './goals/new-goal/new-goal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PointsPipe } from './shared/points.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FriendsListComponent,
     FriendsItemComponent,
     SharedGoalComponent,
-    NewGoalComponent
+    NewGoalComponent,
+    PointsPipe
   ],
   imports: [
     BrowserModule,
