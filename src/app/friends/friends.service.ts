@@ -148,6 +148,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Bieganie',
+        imagePath: 'fas fa-dumbbell',
         frequency: Frequency.MONTHLY,
         total: 9,
         type: GoalType.PHYSICAL,
@@ -167,6 +168,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Siłownia',
+        imagePath: 'fas fa-dumbbell',
         frequency: Frequency.WEEKLY,
         total: 5,
         type: GoalType.PHYSICAL,
@@ -186,6 +188,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Fast food',
+        imagePath: 'fas fa-dumbbell',
         frequency: Frequency.MONTHLY,
         total: 3,
         type: GoalType.HEALTH,
@@ -205,6 +208,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Papierosy',
+        imagePath: 'fas fa-dumbbell',
         frequency: Frequency.DAILY,
         total: 4,
         type: GoalType.HEALTH,

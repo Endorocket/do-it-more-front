@@ -1,0 +1,71 @@
+<section id="new-goal-section" fxLayout="column" fxLayoutAlign="center center">
+  <mat-horizontal-stepper [linear]="true">
+    <mat-step [stepControl]="firstFormGroup" label="Wybierz cel">
+      <form [formGroup]="firstFormGroup">
+        <div *ngFor="let goalsByType of availableGoalsByTypes ">
+          <h4>
+            <span>{{ goalsByType.type.name }}</span>
+            <img [src]="goalsByType.type.iconPath" [alt]="goalsByType.type" height="30" width="30">
+          </h4>
+          <mat-chip-list aria-label="Goal selection">
+            <mat-chip *ngFor="let goal of goalsByType.goals" (click)="onSelectGoal(goal, goalsByType.type)">
+              <span class="available-goal-name">{{ goal.name }}</span>
+              <i [class]="goal.imagePath"></i>
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <div class="navigation-buttons" fxLayout fxLayoutAlign="center">
+          <button mat-button matStepperNext>Dalej</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Uzupełnij szczegóły">
+      <form [formGroup]="secondFormGroup" fxLayout="column" fxLayoutAlign="center center" (ngSubmit)="onSubmit()">
+        <h2 id="form-title">
+          <span class="available-goal-name">{{ firstFormGroup.value.goalName }}</span>
+          <i [class]="firstFormGroup.value.imagePath"></i>
+        </h2>
+
+        <div id="form-content">
+          <div class="form-group">
+            <div class="form-label">Jak często?</div>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+              <mat-form-field class="number-form-field">
+                <input matInput type="number" formControlName="frequencyNumber">
+              </mat-form-field>
+              <mat-select formControlName="frequencyType">
+                <mat-option *ngFor="let frequencyOption of frequencyOptions" [value]="frequencyOption">
+                  {{ frequencyOption }}
+                </mat-option>
+              </mat-select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">Kategoria</div>
+            <mat-radio-group aria-label="Select category" formControlName="category">
+              <mat-radio-button *ngFor="let categoryOption of categoryOptions" [value]="categoryOption">
+                <img [src]="categoryOption.iconPath" height="30" width="30">
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label">Punkty</div>
+            <mat-radio-group aria-label="Select points" formControlName="points">
+              <mat-radio-button *ngFor="let pointsOption of pointsOptions" [value]="pointsOption">
+                {{ pointsOption }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <div class="navigation-buttons">
+          <button mat-button matStepperPrevious>Cofnij</button>
+          <button type="submit" mat-button matStepperNext>Potwiedź</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</section>

@@ -4,6 +4,9 @@
       *ngFor="let goal of goals"
       [goal]="goal">
     </app-goal>
+    <div fxLayout fxLayoutAlign="center center">
+      <mat-icon id="new-goal" routerLink="/new-goal" aria-hidden="false" aria-label="Add new goal" color="accent">add_circle</mat-icon>
+    </div>
   </div>
   <div fxFlex>
     <app-character></app-character>

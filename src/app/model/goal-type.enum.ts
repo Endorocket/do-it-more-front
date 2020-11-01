@@ -11,7 +11,11 @@ export class GoalType {
   static readonly MENTAL = new GoalType('MENTAL', '/assets/images/brain.png');
   static readonly CULTURAL = new GoalType('CULTURAL', '/assets/images/meditation.png');
 
-  private constructor(private readonly name: string, public readonly iconPath: string) {
+  private constructor(public readonly name: string, public readonly iconPath: string) {
+  }
+
+  static values(): GoalType[] {
+    return [GoalType.HEALTH, GoalType.PHYSICAL, GoalType.MENTAL, GoalType.CULTURAL];
   }
 
   toString(): string {

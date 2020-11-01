@@ -16,5 +16,4 @@ export class GoalsComponent implements OnInit {
   ngOnInit(): void {
     this.goals = this.goalsService.getGoals();
   }
-
 }

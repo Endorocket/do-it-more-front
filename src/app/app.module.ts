@@ -17,6 +17,8 @@ import { SharedGoalsComponent } from './friends/shared-goals/shared-goals.compon
 import { FriendsListComponent } from './friends/friends-list/friends-list.component';
 import { FriendsItemComponent } from './friends/friends-list/friends-item/friends-item.component';
 import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-goal.component';
+import { NewGoalComponent } from './goals/new-goal/new-goal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,13 @@ import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-g
     SharedGoalsComponent,
     FriendsListComponent,
     FriendsItemComponent,
-    SharedGoalComponent
+    SharedGoalComponent,
+    NewGoalComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
     AppRoutingModule
