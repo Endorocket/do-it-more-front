@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Character } from '../../model/character.model';
-import { GoalType } from '../../model/goal-type.enum';
+import { Character } from '../model/character.model';
+import { GoalType } from '../model/goal-type.enum';
 
 @Injectable({providedIn: 'root'})
-export class CharacterService {
+export class UserService {
+
   private character: Character = {
     name: 'Endorocket',
     avatar: 'avatar',
@@ -32,7 +33,29 @@ export class CharacterService {
     ]
   };
 
+  private email: string;
+
   getCharacter(): Character {
     return {...this.character};
+  }
+
+  getUsername(): string {
+    return this.character.name;
+  }
+
+  setUsername(username: string): void {
+    this.character.name = username;
+  }
+
+  getEmail(): string {
+    return this.email;
+  }
+
+  setEmail(email: string): void {
+    this.email = email;
+  }
+
+  setPassword(password: string): void {
+    console.log('Password updated');
   }
 }

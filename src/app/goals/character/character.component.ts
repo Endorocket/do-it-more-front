@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Character } from '../../model/character.model';
-import { CharacterService } from './character.service';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-character',
@@ -10,10 +10,10 @@ import { CharacterService } from './character.service';
 export class CharacterComponent implements OnInit {
   character: Character;
 
-  constructor(private characterService: CharacterService) {
+  constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.character = this.characterService.getCharacter();
+    this.character = this.userService.getCharacter();
   }
 }

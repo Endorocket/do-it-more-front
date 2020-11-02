@@ -1,0 +1,75 @@
+<section fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="90" fxFlex.gt-xs="60">
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+      <span>Ustawienia</span>
+    </mat-card-title>
+    <mat-card-content fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="30">
+        <img src="/assets/images/fox.png" alt="avatar" height="150" width="125">
+      </div>
+      <div fxFlex>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Nazwa użytkownika
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ oldUsername }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-form-field>
+                <mat-label>Podaj nową nazwę użytkownika</mat-label>
+                <input type="text" matInput [(ngModel)]="newUsername" #usernameInput="ngModel" required minlength="4">
+              </mat-form-field>
+              <p>
+                <button type="button" mat-raised-button color="primary" [disabled]="!usernameInput.valid" (click)="onChangeUsername()">Zmień</button>
+              </p>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Adres e-mail
+              </mat-panel-title>
+              <mat-panel-description>
+                {{ oldEmail }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-form-field>
+                <mat-label>Podaj nowy adres e-mail</mat-label>
+                <input type="email" matInput [(ngModel)]="newEmail" #emailInput="ngModel" required email>
+              </mat-form-field>
+              <p>
+                <button type="button" mat-raised-button color="primary" [disabled]="!emailInput.valid" (click)="onChangeEmail()">Zmień</button>
+              </p>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Hasło
+              </mat-panel-title>
+              <mat-panel-description>
+                ******
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-form-field>
+                <mat-label>Podaj nowe hasło</mat-label>
+                <input type="password" matInput [(ngModel)]="newPassword" #emailInput="ngModel" required minlength="6">
+              </mat-form-field>
+              <p>
+                <button type="button" mat-raised-button color="primary" [disabled]="!emailInput.valid" (click)="onChangePassword()">Zmień</button>
+              </p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>

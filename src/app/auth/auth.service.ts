@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserService } from '../user/user.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -9,7 +10,7 @@ export class AuthService {
   private isAuthenticated = false;
   private authData: AuthData;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService: UserService) {
   }
 
   initAuth(): void {
@@ -20,6 +21,7 @@ export class AuthService {
     this.isAuthenticated = true;
     this.authChange.next(true);
     this.authData = authData;
+    this.userService.setEmail(authData.email);
     this.router.navigate(['/goals']);
   }
 

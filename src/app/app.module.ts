@@ -18,10 +18,11 @@ import { FriendsListComponent } from './friends/friends-list/friends-list.compon
 import { FriendsItemComponent } from './friends/friends-list/friends-item/friends-item.component';
 import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-goal.component';
 import { NewGoalComponent } from './goals/new-goal/new-goal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PointsPipe } from './shared/points.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     NewGoalComponent,
     PointsPipe,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { SignupComponent } from './auth/signup/signup.component';
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { NewGoalComponent } from './goals/new-goal/new-goal.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './auth/auth.guard';
 import { SignupComponent } from './auth/signup/signup.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'new-goal', component: NewGoalComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
+  {path: 'user', component: UserComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
