@@ -20,6 +20,7 @@ import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-g
 import { NewGoalComponent } from './goals/new-goal/new-goal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PointsPipe } from './shared/points.pipe';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PointsPipe } from './shared/points.pipe';
     FriendsItemComponent,
     SharedGoalComponent,
     NewGoalComponent,
-    PointsPipe
+    PointsPipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

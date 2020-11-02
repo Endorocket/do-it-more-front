@@ -1,0 +1,24 @@
+<section fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="90" fxFlex.gt-xs="40">
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+      <span>Do It More</span>
+    </mat-card-title>
+    <mat-card-content>
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="email.hasError('required')">Pole nie może być puste</mat-error>
+          <mat-error *ngIf="email.hasError('email')">E-Mail jest niepoprawny</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Hasło" formControlName="password">
+          <mat-error *ngIf="password.hasError('required')">Pole nie może być puste</mat-error>
+          <mat-error *ngIf="!password.hasError('required')">Min długość = {{ minLength }}</mat-error>
+          <mat-hint>Min długość = {{ minLength }}</mat-hint>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">Zaloguj</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

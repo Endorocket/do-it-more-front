@@ -1,22 +1,32 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="/goals" (click)="onClose()">
+  <a *ngIf="!isAuth" mat-list-item routerLink="/login" (click)="onClose()">
+    <mat-icon>input</mat-icon>
+    <span class="nav-caption">Zaloguj</span>
+  </a>
+  <a *ngIf="!isAuth" mat-list-item routerLink="/signup" (click)="onClose()">
+    <mat-icon>face</mat-icon>
+    <span class="nav-caption">Zarejestruj</span>
+  </a>
+  <a *ngIf="isAuth" mat-list-item routerLink="/goals" (click)="onClose()">
     <mat-icon>face</mat-icon>
     <span class="nav-caption">Cele</span>
   </a>
-  <a mat-list-item routerLink="/friends" (click)="onClose()">
+  <a *ngIf="isAuth" mat-list-item routerLink="/friends" (click)="onClose()">
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Znajomi</span>
   </a>
-  <a mat-list-item routerLink="/" (click)="onClose()">
+  <a *ngIf="isAuth" mat-list-item routerLink="/" (click)="onClose()">
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Historia</span>
   </a>
-  <a mat-list-item routerLink="/" (click)="onClose()">
+  <a *ngIf="isAuth" mat-list-item routerLink="/" (click)="onClose()">
     <mat-icon>input</mat-icon>
     <span class="nav-caption">Konto</span>
   </a>
-  <a mat-list-item routerLink="/" (click)="onClose()">
-    <mat-icon>input</mat-icon>
-    <span class="nav-caption">Wyloguj</span>
+  <a *ngIf="isAuth" mat-list-item routerLink="/" (click)="onClose()">
+    <button mat-icon-button (click)="onLogout()">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Wyloguj</span>
+    </button>
   </a>
 </mat-nav-list>

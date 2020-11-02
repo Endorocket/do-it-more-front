@@ -7,20 +7,26 @@
   <div><a routerLink="/">LOGO</a></div>
   <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
     <ul fxLayout fxLayoutGap="40px" class="navigation-items">
-      <li>
+      <li *ngIf="!isAuth">
+        <a routerLink="/login">Zaloguj</a>
+      </li>
+      <li *ngIf="!isAuth">
+        <a routerLink="/signup">Zarejestruj</a>
+      </li>
+      <li *ngIf="isAuth">
         <a routerLink="/goals">Cele</a>
       </li>
-      <li>
+      <li *ngIf="isAuth">
         <a routerLink="/friends">Znajomi</a>
       </li>
-      <li>
+      <li *ngIf="isAuth">
         <a routerLink="/">Historia</a>
       </li>
-      <li>
+      <li *ngIf="isAuth">
         <a routerLink="/">Konto</a>
       </li>
-      <li>
-        <a routerLink="/">Wyloguj</a>
+      <li *ngIf="isAuth">
+        <a style="cursor: pointer" (click)="onLogout()">Wyloguj</a>
       </li>
     </ul>
   </div>

@@ -1,0 +1,13 @@
+mat-card {
+  margin-top: 30px;
+  padding: 50px 30px;
+}
+
+mat-card-title {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 20px;
+  text-transform: uppercase;
+}
