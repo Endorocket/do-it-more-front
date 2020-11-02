@@ -1,0 +1,22 @@
+<section fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="90" fxFlex.gt-xs="40">
+    <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+      <span>Do It More</span>
+    </mat-card-title>
+    <mat-card-content>
+  <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input type="email" matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="email.hasError('required')">Pole nie może być puste</mat-error>
+      <mat-error *ngIf="!email.hasError('required')">Email jest niepoprawny</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Hasło" formControlName="password">
+      <mat-hint>Co najmniej {{ minLength }} znaków</mat-hint>
+      <mat-hint align="end">{{ password.value?.length }} / {{ minLength }}</mat-hint>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="registerForm.invalid">Zarejestruj</button>
+  </form>
+    </mat-card-content>
+  </mat-card>
+</section>

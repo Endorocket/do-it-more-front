@@ -33,4 +33,9 @@ export class AuthService {
   isAuth(): boolean {
     return this.isAuthenticated;
   }
+
+  registerUser(authData: AuthData): void {
+    console.log(authData);
+    this.router.navigate(['/login']);
+  }
 }
