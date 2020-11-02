@@ -4,8 +4,7 @@
       <span>Do It More</span>
     </mat-card-title>
     <mat-card-content>
-      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm"
-            (ngSubmit)="onSubmit()">
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <input type="email" matInput placeholder="Email" formControlName="email">
           <mat-error *ngIf="email.hasError('required')">Pole nie może być puste</mat-error>

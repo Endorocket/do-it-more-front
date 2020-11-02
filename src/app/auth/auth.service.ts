@@ -27,6 +27,7 @@ export class AuthService {
     this.isAuthenticated = false;
     this.authChange.next(false);
     this.authData = null;
+    this.router.navigate(['/login']);
   }
 
   isAuth(): boolean {
