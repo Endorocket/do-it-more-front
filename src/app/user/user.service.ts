@@ -7,7 +7,7 @@ export class UserService {
 
   private character: Character = {
     name: 'Endorocket',
-    avatar: 'avatar',
+    avatar: 'tiger',
     level: 2,
     progresses: [
       {

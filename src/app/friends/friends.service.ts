@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Character } from '../model/character.model';
 import { GoalType } from '../model/goal-type.enum';
 import { SharedGoal } from './shared-goals/shared-goal.model';
@@ -8,8 +8,8 @@ import { Frequency } from '../model/frequency.enum';
 export class FriendsService {
   private friends: Character[] = [
     {
-      name: 'Endorocket',
-      avatar: 'avatar',
+      name: 'Mateusz',
+      avatar: 'fox',
       level: 2,
       progresses: [
         {
@@ -35,8 +35,8 @@ export class FriendsService {
       ]
     },
     {
-      name: 'Endorocket',
-      avatar: 'avatar',
+      name: 'Bartek',
+      avatar: 'pig',
       level: 2,
       progresses: [
         {
@@ -62,8 +62,8 @@ export class FriendsService {
       ]
     },
     {
-      name: 'Endorocket',
-      avatar: 'avatar',
+      name: 'Natalia',
+      avatar: 'koala',
       level: 2,
       progresses: [
         {
@@ -89,8 +89,8 @@ export class FriendsService {
       ]
     },
     {
-      name: 'Endorocket',
-      avatar: 'avatar',
+      name: 'Dominik',
+      avatar: 'hippopotamus',
       level: 2,
       progresses: [
         {
@@ -116,8 +116,8 @@ export class FriendsService {
       ]
     },
     {
-      name: 'Endorocket',
-      avatar: 'avatar',
+      name: 'Dominika',
+      avatar: 'chick',
       level: 2,
       progresses: [
         {
@@ -148,7 +148,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Bieganie',
-        imagePath: 'fas fa-dumbbell',
+        icon: 'fas fa-running',
         frequency: Frequency.MONTHLY,
         total: 9,
         type: GoalType.PHYSICAL,
@@ -168,7 +168,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Siłownia',
-        imagePath: 'fas fa-dumbbell',
+        icon: 'fas fa-dumbbell',
         frequency: Frequency.WEEKLY,
         total: 5,
         type: GoalType.PHYSICAL,
@@ -188,7 +188,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Fast food',
-        imagePath: 'fas fa-dumbbell',
+        icon: 'fas fa-hamburger',
         frequency: Frequency.MONTHLY,
         total: 3,
         type: GoalType.HEALTH,
@@ -208,7 +208,7 @@ export class FriendsService {
     {
       goal: {
         name: 'Papierosy',
-        imagePath: 'fas fa-dumbbell',
+        icon: 'fas fa-smoking',
         frequency: Frequency.DAILY,
         total: 4,
         type: GoalType.HEALTH,
@@ -228,7 +228,10 @@ export class FriendsService {
   ];
 
   getFriends(): Character[] {
-    return this.friends.slice();
+    return this.friends.slice().map(friend => {
+      friend.avatar = `/assets/images/avatars/${ friend.avatar }.svg`;
+      return friend;
+    });
   }
 
   getSharedGoals(): SharedGoal[] {

@@ -3,7 +3,7 @@ import { GoalType } from './goal-type.enum';
 
 export interface Goal {
   name: string;
-  imagePath: string;
+  icon: string;
   frequency: Frequency;
   done?: number;
   total: number;

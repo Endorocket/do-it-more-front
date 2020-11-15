@@ -9,11 +9,13 @@ import { UserService } from '../../user/user.service';
 })
 export class CharacterComponent implements OnInit {
   character: Character;
+  avatarPath: string;
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.character = this.userService.getCharacter();
+    this.avatarPath = `/assets/images/avatars/${this.character.avatar}.svg`;
   }
 }

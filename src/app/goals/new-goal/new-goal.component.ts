@@ -50,7 +50,7 @@ export class NewGoalComponent implements OnInit {
 
     this.goalsService.addGoal({
       name: this.firstFormGroup.value.goalName,
-      imagePath: this.firstFormGroup.value.imagePath,
+      icon: this.firstFormGroup.value.imagePath,
       frequency: this.secondFormGroup.value.frequencyType,
       done: 0,
       total: this.secondFormGroup.value.frequencyNumber,

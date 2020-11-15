@@ -10,7 +10,7 @@ export class GoalsService {
   private goals: Goal[] = [
     {
       name: 'Bieganie',
-      imagePath: 'fas fa-dumbbell',
+      icon: 'fas fa-running',
       frequency: Frequency.MONTHLY,
       done: 3,
       total: 9,
@@ -19,7 +19,7 @@ export class GoalsService {
     },
     {
       name: 'Siłownia',
-      imagePath: 'fas fa-dumbbell',
+      icon: 'fas fa-dumbbell',
       frequency: Frequency.WEEKLY,
       done: 4,
       total: 5,
@@ -28,7 +28,7 @@ export class GoalsService {
     },
     {
       name: 'Fast food',
-      imagePath: 'fas fa-dumbbell',
+      icon: 'fas fa-hamburger',
       frequency: Frequency.MONTHLY,
       done: 2,
       total: 3,
@@ -37,7 +37,7 @@ export class GoalsService {
     },
     {
       name: 'Papierosy',
-      imagePath: 'fas fa-dumbbell',
+      icon: 'fas fa-smoking',
       frequency: Frequency.DAILY,
       done: 2,
       total: 4,
@@ -65,7 +65,11 @@ export class GoalsService {
           },
           {
             name: 'Rower',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-bicycle'
+          },
+          {
+            name: 'Bieganie',
+            imagePath: 'fas fa-running'
           }
         ]
       },
@@ -74,11 +78,11 @@ export class GoalsService {
         goals: [
           {
             name: 'Książka',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-book'
           },
           {
             name: 'Programowanie',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-laptop-code'
           }
         ]
       },
@@ -87,7 +91,15 @@ export class GoalsService {
         goals: [
           {
             name: 'Poranne wstawanie',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-child'
+          },
+          {
+            name: 'Modlitwa',
+            imagePath: 'fas fa-pray'
+          },
+          {
+            name: 'Kościół',
+            imagePath: 'fas fa-church'
           }
         ]
       },
@@ -96,11 +108,11 @@ export class GoalsService {
         goals: [
           {
             name: 'Fast food',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-hamburger'
           },
           {
             name: 'Papierosy',
-            imagePath: 'fas fa-dumbbell'
+            imagePath: 'fas fa-smoking'
           }
         ]
       }

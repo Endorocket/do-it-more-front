@@ -8,10 +8,12 @@ import { Character } from '../../../model/character.model';
 })
 export class FriendsItemComponent implements OnInit {
   @Input() friend: Character;
+  avatarPath: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.avatarPath = `/assets/images/avatars/${this.friend.avatar}.svg`;
   }
 
 }
