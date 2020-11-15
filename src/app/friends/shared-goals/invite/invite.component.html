@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Zaproś znajomego do celu</h1>
+<mat-dialog-content>
+  <p>Wybierz nazwę znajomego</p>
+  <mat-form-field>
+    <mat-label>Nazwa użytkownika</mat-label>
+    <mat-select [(ngModel)]="username" required #friend="ngModel">
+      <mat-option *ngFor="let friend of data.friends" [value]="friend.name">
+        {{ friend.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <p class="choose-goal-header">Wybierz cel</p>
+  <mat-form-field>
+    <mat-label>Nazwa celu</mat-label>
+    <mat-select [(ngModel)]="goalName" required #goal="ngModel">
+      <mat-option *ngFor="let goal of data.goals" [value]="goal.name">
+        {{ goal.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-raised-button [mat-dialog-close]="{username: username, goalName: goalName}" color="primary" [disabled]="!friend.valid || !goal.valid">Wyślij zaproszenie</button>
+</mat-dialog-actions>

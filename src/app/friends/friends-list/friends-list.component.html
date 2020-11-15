@@ -1,1 +1,6 @@
-<app-friends-item *ngFor="let friend of friends" [friend]="friend"></app-friends-item>
+<section id="friends-list-section">
+  <app-friends-item *ngFor="let friend of friends" [friend]="friend"></app-friends-item>
+  <div fxLayout fxLayoutAlign="center center">
+      <mat-icon id="new-friend" (click)="openNewFriendDialog()" aria-hidden="false" aria-label="Add new friend" color="accent">add_circle</mat-icon>
+  </div>
+</section>

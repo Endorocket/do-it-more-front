@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Dodaj znajomego</h1>
+<mat-dialog-content>
+  <p>Wpisz nazwę użytkownika</p>
+  <mat-form-field>
+    <mat-label>Nazwa użytkownika</mat-label>
+    <input matInput [(ngModel)]="username" #user="ngModel" required>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-raised-button [mat-dialog-close]="username" color="primary" [disabled]="!user.valid">Wyślij zaproszenie</button>
+</mat-dialog-actions>

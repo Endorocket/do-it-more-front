@@ -1,0 +1,9 @@
+section {
+  margin-bottom: 50px;
+}
+
+#invite-to-goal {
+  margin-top: 30px;
+  transform: scale(3);
+  cursor: pointer;
+}

@@ -1,3 +1,6 @@
 <section>
-<app-shared-goal *ngFor="let sharedGoal of sharedGoals" [sharedGoal]="sharedGoal"></app-shared-goal>
+  <app-shared-goal *ngFor="let sharedGoal of sharedGoals" [sharedGoal]="sharedGoal"></app-shared-goal>
+  <div fxLayout fxLayoutAlign="center center">
+    <mat-icon id="invite-to-goal" (click)="openInviteDialog()" aria-hidden="false" aria-label="Invite to goal" color="accent">add_circle</mat-icon>
+  </div>
 </section>

@@ -23,6 +23,8 @@ import { PointsPipe } from './shared/points.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { UserComponent } from './user/user.component';
+import { NewFriendComponent } from './friends/friends-list/new-friend/new-friend.component';
+import { InviteComponent } from './friends/shared-goals/invite/invite.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { UserComponent } from './user/user.component';
     PointsPipe,
     LoginComponent,
     SignupComponent,
-    UserComponent
+    UserComponent,
+    NewFriendComponent,
+    InviteComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,10 @@ import { UserComponent } from './user/user.component';
     MaterialModule,
     AppRoutingModule,
     FormsModule
+  ],
+  entryComponents: [
+    NewFriendComponent,
+    InviteComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

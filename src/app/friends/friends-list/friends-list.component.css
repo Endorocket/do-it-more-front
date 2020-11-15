@@ -1,0 +1,9 @@
+#friends-list-section {
+  margin-bottom: 50px;
+}
+
+#new-friend {
+  margin-top: 30px;
+  transform: scale(3);
+  cursor: pointer;
+}
