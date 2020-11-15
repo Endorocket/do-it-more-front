@@ -1,0 +1,8 @@
+mat-progress-bar {
+  border-radius: 50px;
+  height: 12px;
+}
+
+.progress {
+  padding-top: 20px;
+}

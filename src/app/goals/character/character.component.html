@@ -1,22 +1,20 @@
 <mat-card>
-  <mat-card-title fxLayout="row" fxLayoutAlign="space-between">
-    <span>{{ character.name }}</span>
+  <mat-card-title fxLayout="row">
+    <div fxFlex="40" fxLayout="column" fxLayoutAlign="center center">
+      <img [src]="avatarPath" alt="avatar" height="175" width="125">
+    </div>
+    <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
+      <h1>{{ character.name }}</h1>
+      <h2>poziom {{ character.level }}</h2>
+    </div>
   </mat-card-title>
   <mat-card-content>
-    <div>
-      <div>
-        <img [src]="avatarPath" alt="avatar" height="175" width="125">
-      </div>
-      <div>
-      {{ character.level }}
-      </div>
-      <div>
-        <span>poziom</span>
-      </div>
-    </div>
-    <div>
-      <div *ngFor="let progress of character.progresses">
+    <div *ngFor="let progress of character.progresses" class="progress">
+      <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
         <img [src]="progress.type.iconPath" [alt]="progress.type" height="30" width="30">
+      </div>
+      <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
+        <mat-progress-bar mode="determinate" [value]="progress.done * 100 / progress.total"></mat-progress-bar>
         {{ progress.done }} / {{ progress.total }}
       </div>
     </div>

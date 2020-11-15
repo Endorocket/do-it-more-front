@@ -1,5 +1,10 @@
 #friends-list-section {
+  padding: 10px 26px 0 26px;
   margin-bottom: 50px;
+}
+
+app-friends-item {
+  padding: 16px;
 }
 
 #new-friend {

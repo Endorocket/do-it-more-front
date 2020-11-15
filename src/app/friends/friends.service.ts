@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Character } from '../model/character.model';
 import { GoalType } from '../model/goal-type.enum';
 import { SharedGoal } from './shared-goals/shared-goal.model';
@@ -228,10 +228,7 @@ export class FriendsService {
   ];
 
   getFriends(): Character[] {
-    return this.friends.slice().map(friend => {
-      friend.avatar = `/assets/images/avatars/${ friend.avatar }.svg`;
-      return friend;
-    });
+    return this.friends.slice();
   }
 
   getSharedGoals(): SharedGoal[] {

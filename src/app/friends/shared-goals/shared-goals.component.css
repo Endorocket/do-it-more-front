@@ -1,5 +1,10 @@
 section {
+  padding: 10px 26px 0 26px;
   margin-bottom: 50px;
+}
+
+app-shared-goal {
+  padding: 16px;
 }
 
 #invite-to-goal {
