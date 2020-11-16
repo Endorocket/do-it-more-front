@@ -1,4 +1,4 @@
-mat-card {
+mat-card#main-card {
   margin-top: 30px;
   padding: 50px 30px;
 }
@@ -14,4 +14,22 @@ mat-form-field {
 button {
   margin-top: 20px;
   text-transform: uppercase;
+}
+
+.avatar-section {
+  margin-top: 20px;
+  max-width: 450px;
+}
+
+.avatar-section p {
+  font-size: 20px;
+  text-align: center;
+}
+
+.available-avatar-card {
+  display: inline-block;
+}
+
+.highlighted {
+  background-color: #d9d9d9;
 }
