@@ -1,15 +1,17 @@
 <section fxLayout="row" fxLayoutAlign="center">
-  <mat-card fxFlex="90" fxFlex.gt-xs="60">
+  <mat-card id="main-card" fxFlex="90" fxFlex.gt-xs="60">
     <mat-card-title fxLayout="row" fxLayoutAlign="center center">
       <span>Ustawienia</span>
     </mat-card-title>
     <mat-card-content fxLayout="row" fxLayoutAlign="center">
-      <div fxFlex="30">
-        <img src="/assets/images/fox.png" alt="avatar" height="150" width="125">
+      <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+        <div>
+          <img [src]="avatarPath" alt="avatar" height="150">
+        </div>
       </div>
       <div fxFlex>
         <mat-accordion>
-          <mat-expansion-panel>
+          <mat-expansion-panel #usernameMep="matExpansionPanel">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Nazwa użytkownika
@@ -24,12 +26,12 @@
                 <input type="text" matInput [(ngModel)]="newUsername" #usernameInput="ngModel" required minlength="4">
               </mat-form-field>
               <p>
-                <button type="button" mat-raised-button color="primary" [disabled]="!usernameInput.valid" (click)="onChangeUsername()">Zmień</button>
+                <button type="button" mat-raised-button color="primary" [disabled]="!usernameInput.valid" (click)="onChangeUsername()">Zmień nazwę użytkownika</button>
               </p>
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel #emailMep="matExpansionPanel">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Adres e-mail
@@ -44,12 +46,12 @@
                 <input type="email" matInput [(ngModel)]="newEmail" #emailInput="ngModel" required email>
               </mat-form-field>
               <p>
-                <button type="button" mat-raised-button color="primary" [disabled]="!emailInput.valid" (click)="onChangeEmail()">Zmień</button>
+                <button type="button" mat-raised-button color="primary" [disabled]="!emailInput.valid" (click)="onChangeEmail()">Zmień e-mail</button>
               </p>
             </div>
           </mat-expansion-panel>
 
-          <mat-expansion-panel>
+          <mat-expansion-panel #passwordMep="matExpansionPanel">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Hasło
@@ -61,10 +63,31 @@
             <div>
               <mat-form-field>
                 <mat-label>Podaj nowe hasło</mat-label>
-                <input type="password" matInput [(ngModel)]="newPassword" #emailInput="ngModel" required minlength="6">
+                <input type="password" matInput [(ngModel)]="newPassword" #passwordInput="ngModel" required minlength="6">
               </mat-form-field>
               <p>
-                <button type="button" mat-raised-button color="primary" [disabled]="!emailInput.valid" (click)="onChangePassword()">Zmień</button>
+                <button type="button" mat-raised-button color="primary" [disabled]="!passwordInput.valid" (click)="onChangePassword()">Zmień hasło</button>
+              </p>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel #avatarMep="matExpansionPanel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Avatar
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <mat-card
+                matRipple
+                class="available-avatar-card"
+                [ngClass]="{'highlighted': selectedAvatarIndex === i}"
+                *ngFor="let availableAvatarPath of availableAvatarsPaths; let i = index"
+                (click)="onSelectAvatar(i)">
+                <img [src]="availableAvatarPath" alt="avatar" height="60">
+              </mat-card>
+              <p class="change-avatar">
+                <button type="button" mat-raised-button color="primary" (click)="onChangeAvatar()" [disabled]="selectedAvatarIndex === null">Zmień avatar</button>
               </p>
             </div>
           </mat-expansion-panel>

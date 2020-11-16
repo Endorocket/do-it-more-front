@@ -58,4 +58,12 @@ export class UserService {
   setPassword(password: string): void {
     console.log('Password updated');
   }
+
+  getAvatar(): string {
+    return this.character.avatar;
+  }
+
+  setAvatar(avatar: string): void {
+    this.character.avatar = avatar;
+  }
 }

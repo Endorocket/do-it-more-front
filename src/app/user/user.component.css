@@ -1,4 +1,4 @@
-mat-card {
+mat-card#main-card {
   margin-top: 30px;
   padding: 50px 30px;
 }
@@ -13,4 +13,20 @@ mat-form-field {
 
 button {
   text-transform: uppercase;
+}
+
+mat-expansion-panel div {
+  padding: 10px 30px 10px 50px;
+}
+
+.available-avatar-card {
+  display: inline-block;
+}
+
+.highlighted {
+  background-color: #d9d9d9;
+}
+
+.change-avatar {
+  padding-top: 10px;
 }

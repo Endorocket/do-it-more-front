@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Character } from '../../../model/character.model';
+import { AvatarService } from '../../../shared/avatar.service';
 
 @Component({
   selector: 'app-friends-item',
@@ -10,10 +11,9 @@ export class FriendsItemComponent implements OnInit {
   @Input() friend: Character;
   avatarPath: string;
 
-  constructor() { }
+  constructor(private avatarService: AvatarService) { }
 
   ngOnInit(): void {
-    this.avatarPath = `/assets/images/avatars/${this.friend.avatar}.svg`;
+    this.avatarPath = this.avatarService.getAvatarPath(this.friend.avatar);
   }
-
 }
