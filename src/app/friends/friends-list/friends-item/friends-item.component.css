@@ -1,3 +1,12 @@
 :host {
   display: inline-block;
 }
+
+mat-progress-bar {
+  border-radius: 50px;
+  height: 10px;
+}
+
+.progress {
+  padding-top: 16px;
+}
