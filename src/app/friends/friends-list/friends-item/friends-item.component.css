@@ -2,6 +2,14 @@
   display: inline-block;
 }
 
+.friend-name {
+  margin-bottom: 0;
+}
+
+.friend-level {
+  margin-bottom: 4px;
+}
+
 mat-progress-bar {
   border-radius: 50px;
   height: 10px;

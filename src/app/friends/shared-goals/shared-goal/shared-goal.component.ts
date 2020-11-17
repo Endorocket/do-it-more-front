@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SharedGoal } from '../shared-goal.model';
+import { AvatarService } from '../../../shared/avatar.service';
 
 @Component({
   selector: 'app-shared-goal',
@@ -9,9 +10,13 @@ import { SharedGoal } from '../shared-goal.model';
 export class SharedGoalComponent implements OnInit {
   @Input() sharedGoal: SharedGoal;
 
-  constructor() { }
+  constructor(private avatarService: AvatarService) {
+  }
 
   ngOnInit(): void {
+    this.sharedGoal.players.forEach(player => {
+      player.avatar = this.avatarService.getAvatarPath(player.avatar);
+    });
   }
 
 }

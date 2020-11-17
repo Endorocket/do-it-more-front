@@ -40,7 +40,7 @@ export class NewGoalComponent implements OnInit {
 
   onSelectGoal(availableGoal: AvailableGoal, type: GoalType): void {
     this.firstFormGroup.controls.goalName.setValue(availableGoal.name);
-    this.firstFormGroup.controls.imagePath.setValue(availableGoal.imagePath);
+    this.firstFormGroup.controls.imagePath.setValue(availableGoal.icon);
     this.secondFormGroup.controls.category.setValue(type);
   }
 

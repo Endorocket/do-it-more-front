@@ -61,15 +61,15 @@ export class GoalsService {
         goals: [
           {
             name: 'Siłownia',
-            imagePath: 'fas fa-dumbbell'
+            icon: 'fas fa-dumbbell'
           },
           {
             name: 'Rower',
-            imagePath: 'fas fa-bicycle'
+            icon: 'fas fa-bicycle'
           },
           {
             name: 'Bieganie',
-            imagePath: 'fas fa-running'
+            icon: 'fas fa-running'
           }
         ]
       },
@@ -78,11 +78,11 @@ export class GoalsService {
         goals: [
           {
             name: 'Książka',
-            imagePath: 'fas fa-book'
+            icon: 'fas fa-book'
           },
           {
             name: 'Programowanie',
-            imagePath: 'fas fa-laptop-code'
+            icon: 'fas fa-laptop-code'
           }
         ]
       },
@@ -91,15 +91,15 @@ export class GoalsService {
         goals: [
           {
             name: 'Poranne wstawanie',
-            imagePath: 'fas fa-child'
+            icon: 'fas fa-child'
           },
           {
             name: 'Modlitwa',
-            imagePath: 'fas fa-pray'
+            icon: 'fas fa-pray'
           },
           {
             name: 'Kościół',
-            imagePath: 'fas fa-church'
+            icon: 'fas fa-church'
           }
         ]
       },
@@ -108,11 +108,11 @@ export class GoalsService {
         goals: [
           {
             name: 'Fast food',
-            imagePath: 'fas fa-hamburger'
+            icon: 'fas fa-hamburger'
           },
           {
             name: 'Papierosy',
-            imagePath: 'fas fa-smoking'
+            icon: 'fas fa-smoking'
           }
         ]
       }

@@ -10,7 +10,7 @@
           <mat-chip-list aria-label="Goal selection">
             <mat-chip *ngFor="let goal of goalsByType.goals" (click)="onSelectGoal(goal, goalsByType.type)">
               <span class="available-goal-name">{{ goal.name }}</span>
-              <i [class]="goal.imagePath"></i>
+              <i [class]="goal.icon"></i>
             </mat-chip>
           </mat-chip-list>
         </div>

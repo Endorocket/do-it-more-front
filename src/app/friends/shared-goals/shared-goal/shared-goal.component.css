@@ -1,3 +1,52 @@
 :host {
   display: inline-block;
 }
+
+mat-card {
+  padding: 24px;
+}
+
+.player-section {
+  padding: 10px 20px 0 20px;
+}
+
+mat-card-title {
+  line-height: 48px;
+}
+
+i {
+  color: #d9d9d9;
+}
+
+.avatar-wrapper {
+
+}
+
+.player-name-wrapper {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.goal-type-wrapper {
+  padding-bottom: 10px;
+}
+
+.points-wrapper {
+  padding-top: 15px;
+  font-size: 20px;
+}
+
+.frequency-wrapper {
+
+}
+
+mat-progress-bar {
+  border-radius: 50px;
+  height: 12px;
+}
+
+.goal-icon {
+  font-size: 40px;
+}

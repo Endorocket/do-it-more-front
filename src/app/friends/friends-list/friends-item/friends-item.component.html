@@ -1,11 +1,11 @@
 <mat-card>
   <mat-card-title fxLayout="row">
     <div fxFlex="40" fxLayout="column" fxLayoutAlign="center center">
-      <img [src]="avatarPath" alt="avatar" height="100">
+      <img [src]="avatarPath" alt="avatar" height="75">
     </div>
     <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
-      <h1>{{ friend.name }}</h1>
-      <h2>poziom {{ friend.level }}</h2>
+      <h2 class="friend-name">{{ friend.name }}</h2>
+      <h3 class="friend-level">poziom {{ friend.level }}</h3>
     </div>
   </mat-card-title>
   <mat-card-content>
