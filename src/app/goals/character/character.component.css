@@ -1,8 +1,21 @@
+mat-card {
+  padding: 24px;
+}
+
+.character-name {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.character-level {
+  font-size: 20px;
+}
+
 mat-progress-bar {
   border-radius: 50px;
   height: 12px;
 }
 
 .progress {
-  padding-top: 20px;
+  padding-top: 16px;
 }

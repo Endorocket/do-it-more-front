@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { GoalsComponent } from './goals/goals.component';
 import { FriendsComponent } from './friends/friends.component';
 import { NewGoalComponent } from './goals/new-goal/new-goal.component';
@@ -10,7 +9,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
+  {path: '', component: GoalsComponent, canActivate: [AuthGuard]},
   {path: 'goals', component: GoalsComponent, canActivate: [AuthGuard]},
   {path: 'friends', component: FriendsComponent, canActivate: [AuthGuard]},
   {path: 'new-goal', component: NewGoalComponent, canActivate: [AuthGuard]},

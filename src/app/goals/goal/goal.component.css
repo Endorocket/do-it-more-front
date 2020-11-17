@@ -2,10 +2,36 @@ mat-card {
   height: 100%;
 }
 
-.background-icon {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(5);
+.icon-wrapper {
+  padding-top: 10px;
+  text-align: center;
+}
+
+i {
   color: rgba(255, 255, 255, 0.8);
+}
+
+.points-wrapper {
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+.points-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.points {
+  display: inline-block;
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.frequency-wrapper {
+  text-align: center;
+}
+
+.frequency-wrapper .current {
+  font-size: 18px;
+  font-weight: 500;
 }
