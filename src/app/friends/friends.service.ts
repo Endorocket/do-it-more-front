@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Character } from '../model/character.model';
 import { GoalType } from '../model/goal-type.enum';
 import { SharedGoal } from './shared-goals/shared-goal.model';
 import { Frequency } from '../model/frequency.enum';
 import { Player } from './shared-goals/player.model';
 import { UserService } from '../user/user.service';
+import { Friend, InvitationStatus } from '../model/friend.model';
 
 @Injectable({providedIn: 'root'})
 export class FriendsService {
@@ -12,7 +12,7 @@ export class FriendsService {
   constructor(private userService: UserService) {
   }
 
-  private friends: Character[] = [
+  private friends: Friend[] = [
     {
       name: 'Mateusz',
       avatar: 'fox',
@@ -38,7 +38,8 @@ export class FriendsService {
           done: 25,
           total: 30
         }
-      ]
+      ],
+      invitationStatus: InvitationStatus.ACCEPTED
     },
     {
       name: 'Bartek',
@@ -65,7 +66,8 @@ export class FriendsService {
           done: 25,
           total: 30
         }
-      ]
+      ],
+      invitationStatus: InvitationStatus.ACCEPTED
     },
     {
       name: 'Natalia',
@@ -92,7 +94,8 @@ export class FriendsService {
           done: 25,
           total: 30
         }
-      ]
+      ],
+      invitationStatus: InvitationStatus.ACCEPTED
     },
     {
       name: 'Dominik',
@@ -119,7 +122,8 @@ export class FriendsService {
           done: 25,
           total: 30
         }
-      ]
+      ],
+      invitationStatus: InvitationStatus.ACCEPTED
     },
     {
       name: 'Dominika',
@@ -146,11 +150,12 @@ export class FriendsService {
           done: 25,
           total: 30
         }
-      ]
+      ],
+      invitationStatus: InvitationStatus.PENDING
     }
   ];
 
-  getFriends(): Character[] {
+  getFriends(): Friend[] {
     return this.friends.slice();
   }
 
@@ -237,5 +242,43 @@ export class FriendsService {
     ];
 
     return sharedGoals.slice();
+  }
+
+  addFriend(username: string): boolean {
+    // find friend from backend, boolean is result
+    const foundFriend: Friend = {
+      name: username,
+      avatar: 'fox',
+      level: 2,
+      progresses: [
+        {
+          type: GoalType.HEALTH,
+          done: 20,
+          total: 30
+        },
+        {
+          type: GoalType.PHYSICAL,
+          done: 10,
+          total: 30
+        },
+        {
+          type: GoalType.MENTAL,
+          done: 5,
+          total: 30
+        },
+        {
+          type: GoalType.CULTURAL,
+          done: 25,
+          total: 30
+        }
+      ],
+      invitationStatus: InvitationStatus.PENDING
+    };
+    this.friends.push(foundFriend);
+    return true;
+  }
+
+  inviteToSharedGoal(goalName: string, username: string): void {
+    // TODO
   }
 }

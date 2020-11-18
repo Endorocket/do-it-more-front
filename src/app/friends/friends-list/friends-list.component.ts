@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Character } from '../../model/character.model';
 import { FriendsService } from '../friends.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFriendComponent } from './new-friend/new-friend.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Friend, InvitationStatus } from '../../model/friend.model';
 
 @Component({
   selector: 'app-friends-list',
@@ -11,13 +11,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./friends-list.component.css']
 })
 export class FriendsListComponent implements OnInit {
-  friends: Character[];
+  acceptedFriends: Friend[];
+  pendingFriends: Friend[];
 
   constructor(private friendsService: FriendsService, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.friends = this.friendsService.getFriends();
+    const allFriends = this.friendsService.getFriends();
+    this.acceptedFriends = allFriends.filter(friend => friend.invitationStatus === InvitationStatus.ACCEPTED);
+    this.pendingFriends = allFriends.filter(friend => friend.invitationStatus === InvitationStatus.PENDING);
   }
 
   openNewFriendDialog(): void {

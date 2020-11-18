@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FriendsService } from '../../friends.service';
 
 @Component({
   selector: 'app-new-friend',
@@ -7,13 +8,20 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./new-friend.component.css']
 })
 export class NewFriendComponent implements OnInit {
+  username: string;
 
-  constructor(public dialogRef: MatDialogRef<NewFriendComponent>, @Inject(MAT_DIALOG_DATA) public username: string) { }
+  constructor(public dialogRef: MatDialogRef<NewFriendComponent>,
+              private friendsService: FriendsService) {
+  }
 
   ngOnInit(): void {
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onAddFriend(): void {
+    this.friendsService.addFriend(this.username);
   }
 }

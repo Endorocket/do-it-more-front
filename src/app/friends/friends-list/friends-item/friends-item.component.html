@@ -9,6 +9,7 @@
     </div>
   </mat-card-title>
   <mat-card-content>
+    <div *ngIf="friend.invitationStatus === 'ACCEPTED'; else pending">
     <div *ngFor="let progress of friend.progresses" class="progress">
       <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
         <img [src]="progress.type.iconPath" [alt]="progress.type" height="30" width="30">
@@ -18,5 +19,10 @@
         {{ progress.done }} / {{ progress.total }}
       </div>
     </div>
+    </div>
+
+    <ng-template #pending>
+      <h2>Wysłano zaproszenie</h2>
+    </ng-template>
   </mat-card-content>
 </mat-card>

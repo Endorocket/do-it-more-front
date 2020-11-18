@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Character } from '../../../model/character.model';
 import { AvatarService } from '../../../shared/avatar.service';
+import { Friend } from '../../../model/friend.model';
 
 @Component({
   selector: 'app-friends-item',
@@ -8,7 +8,7 @@ import { AvatarService } from '../../../shared/avatar.service';
   styleUrls: ['./friends-item.component.css']
 })
 export class FriendsItemComponent implements OnInit {
-  @Input() friend: Character;
+  @Input() friend: Friend;
   avatarPath: string;
 
   constructor(private avatarService: AvatarService) { }
