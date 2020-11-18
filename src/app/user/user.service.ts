@@ -66,4 +66,19 @@ export class UserService {
   setAvatar(avatar: string): void {
     this.character.avatar = avatar;
   }
+
+  updatePoints(changePoints: number, goalType: GoalType): void {
+    const changedProgress = this.character.progresses.find(progress => progress.type === goalType);
+    changedProgress.done += changePoints;
+    if (changePoints > 0 && changedProgress.done > changedProgress.total) {
+      changedProgress.done = changedProgress.done - changedProgress.total;
+      this.character.level++;
+    } else if (changePoints < 0 && changedProgress.done < 0) {
+      changedProgress.done = changedProgress.total - changedProgress.done;
+      this.character.level--;
+    }
+    if (this.character.level <= 0) {
+      this.character.level = 1;
+    }
+  }
 }

@@ -25,6 +25,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { NewFriendComponent } from './friends/friends-list/new-friend/new-friend.component';
 import { InviteComponent } from './friends/shared-goals/invite/invite.component';
+import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { InviteComponent } from './friends/shared-goals/invite/invite.component'
     SignupComponent,
     UserComponent,
     NewFriendComponent,
-    InviteComponent
+    InviteComponent,
+    GoalDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { InviteComponent } from './friends/shared-goals/invite/invite.component'
   ],
   entryComponents: [
     NewFriendComponent,
-    InviteComponent
+    InviteComponent,
+    GoalDetailComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

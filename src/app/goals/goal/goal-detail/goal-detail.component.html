@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>{{ goal.name }}</h1>
+<mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
+  <div>
+    <mat-icon class="change-icon" aria-hidden="false" aria-label="Minus" (click)="onUpdateDone(false)">remove_circle</mat-icon>
+    <span class="points-summed">{{ goal.done + change }}</span>
+    <mat-icon class="change-icon" aria-hidden="false" aria-label="Plus" (click)="onUpdateDone(true)">add_circle</mat-icon>
+  </div>
+  <div>Cel: <b>{{ goal.total }}</b> {{ goal.frequency }}</div>
+  <div>Zmiana: {{ change | points }}</div>
+  <div class="points-with-icon">
+    <span class="points">Punkty: {{ points | points }}</span>
+    <img [src]="goal.type.iconPath" [alt]="goal.type" height="20" width="20">
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="center">
+  <button mat-button (click)="onNoClick()">Anuluj</button>
+  <button mat-raised-button (click)="onConfirmClick()" [mat-dialog-close]="change" color="primary" [disabled]="change === 0">Zatwierdź</button>
+</mat-dialog-actions>

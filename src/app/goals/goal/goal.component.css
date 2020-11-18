@@ -1,5 +1,6 @@
 mat-card {
   height: 100%;
+  cursor: pointer;
 }
 
 .icon-wrapper {

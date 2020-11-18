@@ -118,4 +118,9 @@ export class GoalsService {
       }
     ];
   }
+
+  updateGoal(change: number, name: string): void {
+    const updatedGoal = this.goals.find(goal => goal.name === name);
+    updatedGoal.done += change;
+  }
 }

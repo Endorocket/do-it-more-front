@@ -1,0 +1,32 @@
+h1 {
+  text-align: center;
+}
+
+b {
+  font-weight: 600;
+}
+
+.points-summed {
+  font-size: 44px;
+  font-weight: 600;
+}
+
+.change-icon {
+  margin: 20px;
+  transform: scale(1.4);
+  cursor: pointer;
+}
+
+.points-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.points {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+mat-dialog-actions {
+  margin-top: 20px;
+}
