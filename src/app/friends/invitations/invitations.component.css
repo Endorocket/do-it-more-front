@@ -1,0 +1,7 @@
+section#friend-requests-section {
+  padding-top: 10px;
+}
+
+app-friend-request, app-goal-invitation {
+  padding: 16px;
+}

@@ -1,0 +1,7 @@
+<section id="friend-requests-section">
+  <app-friend-request *ngFor="let friendRequest of friendRequests" [friendRequest]="friendRequest"></app-friend-request>
+</section>
+<mat-divider></mat-divider>
+<section id="goal-invitations-section">
+  <app-goal-invitation *ngFor="let goalInvitation of goalInvitations" [goalInvitation]="goalInvitation"></app-goal-invitation>
+</section>

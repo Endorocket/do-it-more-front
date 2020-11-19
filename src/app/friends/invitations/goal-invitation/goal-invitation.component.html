@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <img [src]="avatarPath" alt="avatar" height="55">
+    </div>
+    <div class="title-section">
+      <div class="sender-name">{{ goalInvitation.senderName }}</div>
+      <div class="mat-card-subtitle">wysyła Ci zaproszenie do celu</div>
+    </div>
+  </mat-card-title>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <div class="mat-card-title" fxLayout="row" fxLayoutAlign="center">
+      <span>{{ goalInvitation.goal.name }}</span>
+    </div>
+    <div>
+      <div class="icon-wrapper">
+        <i class="fa-7x" [class]="goalInvitation.goal.icon"></i>
+      </div>
+      <div class="points-wrapper" fxLayout="row" fxLayoutAlign="space-between">
+        <div class="points-with-icon">
+          <img [src]="goalInvitation.goal.type.iconPath" [alt]="goalInvitation.goal.type" height="30" width="30">
+          <span class="points">{{ goalInvitation.goal.points | points }}</span>
+        </div>
+        <div class="frequency-wrapper">
+          <div class="current">
+            {{ goalInvitation.goal.total }}
+          </div>
+          <div>
+            {{ goalInvitation.goal.frequency }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions align="end">
+    <button mat-button>Odrzuć</button>
+    <button mat-raised-button color="primary">Akceptuj</button>
+  </mat-card-actions>
+</mat-card>

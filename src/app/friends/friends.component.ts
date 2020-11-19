@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendsService } from './friends.service';
+import { InvitationData } from './invitations/invitation-data.model';
 
 @Component({
   selector: 'app-friends',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
+  invitationData: InvitationData;
+  numberOfInvitations: number;
 
-  constructor() { }
+  constructor(private friendsService: FriendsService) { }
 
   ngOnInit(): void {
+    this.invitationData = this.friendsService.getInvitations();
+    this.numberOfInvitations = this.friendsService.getNumberOfInvitations();
   }
 
 }

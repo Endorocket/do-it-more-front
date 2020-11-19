@@ -5,6 +5,7 @@ import { Frequency } from '../model/frequency.enum';
 import { Player } from './shared-goals/player.model';
 import { UserService } from '../user/user.service';
 import { Friend, InvitationStatus } from '../model/friend.model';
+import { InvitationData } from './invitations/invitation-data.model';
 
 @Injectable({providedIn: 'root'})
 export class FriendsService {
@@ -155,6 +156,29 @@ export class FriendsService {
     }
   ];
 
+  private invitations: InvitationData = {
+    friendRequests: [
+      {
+        senderName: 'Piotr',
+        senderAvatar: 'fox'
+      }
+    ],
+    goalInvitations: [
+      {
+        senderName: 'Damian',
+        senderAvatar: 'fox',
+        goal: {
+          name: 'Siłownia',
+          icon: 'fas fa-dumbbell',
+          frequency: Frequency.WEEKLY,
+          total: 5,
+          type: GoalType.PHYSICAL,
+          points: 2
+        },
+      }
+    ]
+  };
+
   getFriends(): Friend[] {
     return this.friends.slice();
   }
@@ -242,6 +266,14 @@ export class FriendsService {
     ];
 
     return sharedGoals.slice();
+  }
+
+  getInvitations(): InvitationData {
+    return {...this.invitations};
+  }
+
+  getNumberOfInvitations(): number {
+    return this.invitations.friendRequests.length + this.invitations.goalInvitations.length;
   }
 
   addFriend(username: string): boolean {

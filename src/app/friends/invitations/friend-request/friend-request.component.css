@@ -1,0 +1,12 @@
+:host {
+  display: inline-block;
+}
+
+.title-section {
+  padding-left: 10px;
+}
+
+.mat-card-subtitle {
+  margin-top: 6px;
+  margin-bottom: 0;
+}

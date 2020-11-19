@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-card-title fxLayout="row" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <img [src]="avatarPath" alt="avatar" height="55">
+    </div>
+    <div class="title-section">
+      <div class="sender-name">{{ friendRequest.senderName }}</div>
+      <div class="mat-card-subtitle">wysyła Ci zaproszenie</div>
+    </div>
+  </mat-card-title>
+  <mat-card-actions align="end">
+    <button mat-button>Odrzuć</button>
+    <button mat-raised-button color="primary">Akceptuj</button>
+  </mat-card-actions>
+</mat-card>

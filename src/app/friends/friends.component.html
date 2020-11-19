@@ -5,4 +5,7 @@
   <mat-tab label="Lista znajomych">
     <app-friends-list></app-friends-list>
   </mat-tab>
+  <mat-tab *ngIf="numberOfInvitations > 0" label="Zaproszenia">
+    <app-invitations></app-invitations>
+  </mat-tab>
 </mat-tab-group>

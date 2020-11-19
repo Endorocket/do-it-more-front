@@ -1,0 +1,59 @@
+:host {
+  display: inline-block;
+}
+
+.title-section {
+  padding-left: 10px;
+}
+
+.mat-card-subtitle {
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.icon-wrapper {
+  padding-top: 10px;
+  text-align: center;
+}
+
+i {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.points-wrapper {
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+.points-with-icon {
+  display: flex;
+  align-items: center;
+}
+
+.points {
+  display: inline-block;
+  padding-left: 5px;
+  font-size: 20px;
+}
+
+.frequency-wrapper {
+  text-align: center;
+}
+
+.frequency-wrapper .current {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+mat-card-title {
+  padding-bottom: 6px;
+}
+
+mat-card-content {
+  padding-top: 16px;
+  padding-bottom: 10px;
+}
+
+mat-card-actions {
+  padding-top: 10px;
+}

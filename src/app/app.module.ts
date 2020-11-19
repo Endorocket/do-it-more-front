@@ -26,6 +26,9 @@ import { UserComponent } from './user/user.component';
 import { NewFriendComponent } from './friends/friends-list/new-friend/new-friend.component';
 import { InviteComponent } from './friends/shared-goals/invite/invite.component';
 import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.component';
+import { InvitationsComponent } from './friends/invitations/invitations.component';
+import { FriendRequestComponent } from './friends/invitations/friend-request/friend-request.component';
+import { GoalInvitationComponent } from './friends/invitations/goal-invitation/goal-invitation.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.compon
     UserComponent,
     NewFriendComponent,
     InviteComponent,
-    GoalDetailComponent
+    GoalDetailComponent,
+    InvitationsComponent,
+    FriendRequestComponent,
+    GoalInvitationComponent
   ],
   imports: [
     BrowserModule,
