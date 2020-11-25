@@ -1,5 +1,6 @@
 export class AuthData {
-  email: string;
+  username: string;
   password: string;
+  email?: string;
   avatar?: string;
 }

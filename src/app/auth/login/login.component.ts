@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  email: FormControl;
+  username: FormControl;
   password: FormControl;
   loginForm: FormGroup;
   minLength = 6;
@@ -17,18 +17,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.email = new FormControl(null, [Validators.required, Validators.email]);
+    this.username = new FormControl(null, [Validators.required]);
     this.password = new FormControl(null, [Validators.required, Validators.minLength(this.minLength)]);
 
     this.loginForm = new FormGroup({
-      email: this.email,
+      username: this.username,
       password: this.password
     });
   }
 
   onSubmit(): void {
     this.authService.login({
-      email: this.loginForm.value.email,
+      username: this.loginForm.value.username,
       password: this.loginForm.value.password
     });
   }

@@ -3,6 +3,7 @@ import { AuthData } from './auth-data.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
+import { Auth } from 'aws-amplify';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -17,19 +18,34 @@ export class AuthService {
     this.authChange.next(false);
   }
 
-  login(authData: AuthData): void {
-    this.isAuthenticated = true;
-    this.authChange.next(true);
-    this.authData = authData;
-    this.userService.setEmail(authData.email);
-    this.router.navigate(['/goals']);
+  async login(authData: AuthData): Promise<void> {
+    try {
+      const user = await Auth.signIn(authData.username, authData.password);
+      console.log(user);
+      const tokens = user.signInUserSession;
+      if (tokens != null) {
+        console.log('User authenticated');
+        this.isAuthenticated = true;
+        this.authChange.next(true);
+        this.authData = authData;
+        this.router.navigate(['/goals']);
+      }
+    } catch (err) {
+      console.log(err);
+      alert('User Authentication failed');
+    }
   }
 
-  logout(): void {
-    this.isAuthenticated = false;
-    this.authChange.next(false);
-    this.authData = null;
-    this.router.navigate(['/login']);
+  async logout(): Promise<void> {
+    try {
+      await Auth.signOut();
+      this.isAuthenticated = false;
+      this.authChange.next(false);
+      this.authData = null;
+      this.router.navigate(['/login']);
+    } catch (err) {
+      console.log('error signing out: ', err);
+    }
   }
 
   isAuth(): boolean {
@@ -37,7 +53,19 @@ export class AuthService {
   }
 
   registerUser(authData: AuthData): void {
-    console.log(authData);
-    this.router.navigate(['/login']);
+    try {
+      const user = Auth.signUp({
+        username: authData.username,
+        password: authData.password,
+        attributes: {
+          email: authData.email,
+          'custom:avatar': authData.avatar
+        }
+      });
+      console.log({user});
+      this.router.navigate(['/login']);
+    } catch (err) {
+      console.log('error signing up', err);
+    }
   }
 }

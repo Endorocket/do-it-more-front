@@ -6,9 +6,8 @@
     <mat-card-content>
       <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
-          <input type="email" matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="email.hasError('required')">Pole nie może być puste</mat-error>
-          <mat-error *ngIf="email.hasError('email')">E-Mail jest niepoprawny</mat-error>
+          <input type="text" matInput placeholder="Username" formControlName="username">
+          <mat-error *ngIf="username.hasError('required')">Pole nie może być puste</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input type="password" matInput placeholder="Hasło" formControlName="password">

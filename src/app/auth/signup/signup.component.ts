@@ -11,6 +11,7 @@ import { AvatarService } from '../../shared/avatar.service';
 export class SignupComponent implements OnInit {
   availableAvatarsPaths: string[];
 
+  username: FormControl;
   email: FormControl;
   password: FormControl;
   registerForm: FormGroup;
@@ -23,10 +24,12 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.availableAvatarsPaths = this.avatarService.getAvailableAvatarsPaths();
 
+    this.username = new FormControl(null, [Validators.required]);
     this.email = new FormControl(null, [Validators.required, Validators.email]);
     this.password = new FormControl(null, [Validators.required, Validators.minLength(this.minLength)]);
 
     this.registerForm = new FormGroup({
+      username: this.username,
       email: this.email,
       password: this.password
     });
@@ -38,8 +41,9 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     this.authService.registerUser({
-      email: this.registerForm.value.email,
+      username: this.registerForm.value.username,
       password: this.registerForm.value.password,
+      email: this.registerForm.value.email,
       avatar: this.avatarService.getAvatarNameFromPath(this.availableAvatarsPaths[this.selectedAvatarIndex])
     });
   }

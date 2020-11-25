@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { Amplify } from 'aws-amplify';
 
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +20,6 @@ import { FriendsListComponent } from './friends/friends-list/friends-list.compon
 import { FriendsItemComponent } from './friends/friends-list/friends-item/friends-item.component';
 import { SharedGoalComponent } from './friends/shared-goals/shared-goal/shared-goal.component';
 import { NewGoalComponent } from './goals/new-goal/new-goal.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PointsPipe } from './shared/points.pipe';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -29,6 +30,16 @@ import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.compon
 import { InvitationsComponent } from './friends/invitations/invitations.component';
 import { FriendRequestComponent } from './friends/invitations/friend-request/friend-request.component';
 import { GoalInvitationComponent } from './friends/invitations/goal-invitation/goal-invitation.component';
+
+Amplify.configure({
+  Auth: {
+    mandatorySignIn: true,
+    region: 'eu-central-1',
+    userPoolId: 'eu-central-1_OEr5EaRKw',
+    userPoolWebClientId: '38l7bm40d3ssrh06bpf771nc92',
+    authenticationFlowType: 'USER_PASSWORD_AUTH'
+  }
+});
 
 @NgModule({
   declarations: [
