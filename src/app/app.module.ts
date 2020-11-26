@@ -35,8 +35,8 @@ Amplify.configure({
   Auth: {
     mandatorySignIn: true,
     region: 'eu-central-1',
-    userPoolId: 'eu-central-1_OEr5EaRKw',
-    userPoolWebClientId: '38l7bm40d3ssrh06bpf771nc92',
+    userPoolId: 'eu-central-1_KB4rWDaWw',
+    userPoolWebClientId: '5oq2m7qblv38s5t61fi4lvno70',
     authenticationFlowType: 'USER_PASSWORD_AUTH'
   }
 });
