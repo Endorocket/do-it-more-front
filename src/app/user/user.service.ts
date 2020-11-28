@@ -1,42 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Character } from '../model/character.model';
 import { GoalType } from '../model/goal-type.enum';
+import { Subject } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
 
-  private character: Character = {
-    name: 'Endorocket',
-    avatar: 'tiger',
-    level: 2,
-    progresses: [
-      {
-        type: GoalType.HEALTH,
-        done: 20,
-        total: 30
-      },
-      {
-        type: GoalType.PHYSICAL,
-        done: 10,
-        total: 30
-      },
-      {
-        type: GoalType.MENTAL,
-        done: 5,
-        total: 30
-      },
-      {
-        type: GoalType.CULTURAL,
-        done: 25,
-        total: 30
-      }
-    ]
-  };
+  private character: Character = null;
+  characterChanged = new Subject<Character>();
 
   private email: string;
 
   getCharacter(): Character {
     return {...this.character};
+  }
+
+  setCharacter(character: Character): void {
+    this.character = character;
+    this.characterChanged.next(character);
   }
 
   getUsername(): string {
@@ -69,12 +50,12 @@ export class UserService {
 
   updatePoints(changePoints: number, goalType: GoalType): void {
     const changedProgress = this.character.progresses.find(progress => progress.type === goalType);
-    changedProgress.done += changePoints;
-    if (changePoints > 0 && changedProgress.done > changedProgress.total) {
-      changedProgress.done = changedProgress.done - changedProgress.total;
+    changedProgress.achieved += changePoints;
+    if (changePoints > 0 && changedProgress.achieved > changedProgress.total) {
+      changedProgress.achieved = changedProgress.achieved - changedProgress.total;
       this.character.level++;
-    } else if (changePoints < 0 && changedProgress.done < 0) {
-      changedProgress.done = changedProgress.total - changedProgress.done;
+    } else if (changePoints < 0 && changedProgress.achieved < 0) {
+      changedProgress.achieved = changedProgress.total - changedProgress.achieved;
       this.character.level--;
     }
     if (this.character.level <= 0) {

@@ -21,22 +21,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],
@@ -49,22 +49,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],
@@ -77,22 +77,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],
@@ -105,22 +105,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],
@@ -133,22 +133,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],
@@ -168,10 +168,11 @@ export class FriendsService {
         senderName: 'Damian',
         senderAvatar: 'fox',
         goal: {
+          id: '1',
           name: 'Siłownia',
           icon: 'fas fa-dumbbell',
           frequency: Frequency.WEEKLY,
-          total: 5,
+          totalTimes: 5,
           type: GoalType.PHYSICAL,
           points: 2
         },
@@ -193,10 +194,11 @@ export class FriendsService {
     const sharedGoals: SharedGoal[] = [
       {
         goal: {
+          id: '1',
           name: 'Bieganie',
           icon: 'fas fa-running',
           frequency: Frequency.MONTHLY,
-          total: 9,
+          totalTimes: 9,
           type: GoalType.PHYSICAL,
           points: 4
         },
@@ -211,10 +213,11 @@ export class FriendsService {
       },
       {
         goal: {
+          id: '1',
           name: 'Siłownia',
           icon: 'fas fa-dumbbell',
           frequency: Frequency.WEEKLY,
-          total: 5,
+          totalTimes: 5,
           type: GoalType.PHYSICAL,
           points: 2
         },
@@ -229,10 +232,11 @@ export class FriendsService {
       },
       {
         goal: {
+          id: '1',
           name: 'Fast food',
           icon: 'fas fa-hamburger',
           frequency: Frequency.MONTHLY,
-          total: 3,
+          totalTimes: 3,
           type: GoalType.HEALTH,
           points: -5
         },
@@ -247,10 +251,11 @@ export class FriendsService {
       },
       {
         goal: {
+          id: '1',
           name: 'Papierosy',
           icon: 'fas fa-smoking',
           frequency: Frequency.DAILY,
-          total: 4,
+          totalTimes: 4,
           type: GoalType.HEALTH,
           points: -2
         },
@@ -285,22 +290,22 @@ export class FriendsService {
       progresses: [
         {
           type: GoalType.HEALTH,
-          done: 20,
+          achieved: 20,
           total: 30
         },
         {
           type: GoalType.PHYSICAL,
-          done: 10,
+          achieved: 10,
           total: 30
         },
         {
           type: GoalType.MENTAL,
-          done: 5,
+          achieved: 5,
           total: 30
         },
         {
           type: GoalType.CULTURAL,
-          done: 25,
+          achieved: 25,
           total: 30
         }
       ],

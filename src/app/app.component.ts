@@ -7,15 +7,10 @@ import { AuthService } from './auth/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
   constructor(private authService: AuthService) {
   }
 
-  ngOnInit(): void {
-    this.authService.initAuth();
-    // this.authService.login({
-    //   email: 'mateusz.gmerek@test',
-    //   password: '11111111'
-    // });
+  async ngOnInit(): Promise<void> {
+    await this.authService.autoLogin();
   }
 }

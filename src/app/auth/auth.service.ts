@@ -14,10 +14,6 @@ export class AuthService {
   constructor(private router: Router, private userService: UserService) {
   }
 
-  initAuth(): void {
-    this.authChange.next(false);
-  }
-
   async login(authData: AuthData): Promise<void> {
     try {
       const user = await Auth.signIn(authData.username, authData.password);
@@ -67,5 +63,27 @@ export class AuthService {
     } catch (err) {
       console.log('error signing up', err);
     }
+  }
+
+  async autoLogin(): Promise<void> {
+    const idToken: string = await this.getIdToken();
+    if (!idToken) {
+      this.authChange.next(false);
+      return;
+    }
+    console.log('User authenticated');
+    this.isAuthenticated = true;
+    this.authChange.next(true);
+
+    const currentUserInfo = await Auth.currentUserInfo();
+    console.log(currentUserInfo);
+    this.userService.setEmail(currentUserInfo.attributes.email);
+    this.router.navigate(['/goals']);
+  }
+
+  async getIdToken(): Promise<string> {
+    // Auth.currentSession() checks if token is expired and refreshes with Cognito if needed automatically
+    const session = await Auth.currentSession();
+    return session.getIdToken().getJwtToken();
   }
 }

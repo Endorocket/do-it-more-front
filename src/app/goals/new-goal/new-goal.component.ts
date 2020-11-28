@@ -52,8 +52,8 @@ export class NewGoalComponent implements OnInit {
       name: this.firstFormGroup.value.goalName,
       icon: this.firstFormGroup.value.imagePath,
       frequency: this.secondFormGroup.value.frequencyType,
-      done: 0,
-      total: this.secondFormGroup.value.frequencyNumber,
+      doneTimes: 0,
+      totalTimes: this.secondFormGroup.value.frequencyNumber,
       type: this.secondFormGroup.value.category,
       points: this.secondFormGroup.value.points
     });

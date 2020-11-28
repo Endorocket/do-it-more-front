@@ -7,6 +7,16 @@ export class GoalType {
   private constructor(public readonly name: string, public readonly iconPath: string) {
   }
 
+  static getByName(name: string): GoalType {
+    const goalTypes = this.values();
+    for (const goalType of goalTypes) {
+      if (goalType.name === name) {
+        return goalType;
+      }
+    }
+    throw new Error('Invalid name of GoalType');
+  }
+
   static values(): GoalType[] {
     return [GoalType.HEALTH, GoalType.PHYSICAL, GoalType.MENTAL, GoalType.CULTURAL];
   }

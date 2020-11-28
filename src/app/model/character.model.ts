@@ -9,6 +9,6 @@ export interface Character {
 
 export interface Progress {
   type: GoalType;
-  done: number;
+  achieved: number;
   total: number;
 }

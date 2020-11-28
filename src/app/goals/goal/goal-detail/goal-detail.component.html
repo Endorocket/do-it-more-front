@@ -2,10 +2,10 @@
 <mat-dialog-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="16px">
   <div>
     <mat-icon class="change-icon" aria-hidden="false" aria-label="Minus" (click)="onUpdateDone(false)">remove_circle</mat-icon>
-    <span class="points-summed">{{ goal.done + change }}</span>
+    <span class="points-summed">{{ goal.doneTimes + change }}</span>
     <mat-icon class="change-icon" aria-hidden="false" aria-label="Plus" (click)="onUpdateDone(true)">add_circle</mat-icon>
   </div>
-  <div>Cel: <b>{{ goal.total }}</b> {{ goal.frequency }}</div>
+  <div>Cel: <b>{{ goal.totalTimes }}</b> {{ goal.frequency }}</div>
   <div>Zmiana: {{ change | points }}</div>
   <div class="points-with-icon">
     <span class="points">Punkty: {{ points | points }}</span>

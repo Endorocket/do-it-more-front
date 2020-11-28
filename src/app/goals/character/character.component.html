@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!isLoading">
   <mat-card-title fxLayout="row">
     <div fxFlex="50" fxLayout="column" fxLayoutAlign="center center">
       <img [src]="avatarPath" alt="avatar" height="125">
@@ -14,8 +14,8 @@
         <img [src]="progress.type.iconPath" [alt]="progress.type" height="30" width="30">
       </div>
       <div fxFlex="80" fxLayout="column" fxLayoutAlign="center center">
-        <mat-progress-bar mode="determinate" [value]="progress.done * 100 / progress.total"></mat-progress-bar>
-        {{ progress.done }} / {{ progress.total }}
+        <mat-progress-bar mode="determinate" [value]="progress.achieved * 100 / progress.total"></mat-progress-bar>
+        {{ progress.achieved }} / {{ progress.total }}
       </div>
     </div>
   </mat-card-content>

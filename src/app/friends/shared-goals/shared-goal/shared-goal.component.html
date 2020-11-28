@@ -16,9 +16,9 @@
       <div class="goal-type-wrapper">
         <img [src]="sharedGoal.goal.type.iconPath" [alt]="sharedGoal.goal.type" height="30" width="30">
       </div>
-      <mat-progress-bar mode="determinate" [value]="player.donePoints * 100 / sharedGoal.goal.total"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="player.donePoints * 100 / sharedGoal.goal.totalTimes"></mat-progress-bar>
       <div class="points-wrapper">
-        {{ player.donePoints }} / {{ sharedGoal.goal.total }}
+        {{ player.donePoints }} / {{ sharedGoal.goal.totalTimes }}
       </div>
       <div class="frequency-wrapper">
         {{ sharedGoal.goal.frequency }}

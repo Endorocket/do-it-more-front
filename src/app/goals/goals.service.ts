@@ -1,53 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Goal } from '../model/goal.model';
-import { Frequency } from '../model/frequency.enum';
 import { GoalType } from '../model/goal-type.enum';
 import { AvailableGoalsByType } from './available-goal.model';
+import { Subject } from 'rxjs';
+import { UserAndGoalsData } from './user-and-goals-data.model';
+import { environment } from '../../environments/environment';
+import { Frequency } from '../model/frequency.enum';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from '../user/user.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({providedIn: 'root'})
 export class GoalsService {
+  private goals: Goal[] = [];
+  goalsChanged = new Subject<Goal[]>();
 
-  private goals: Goal[] = [
-    {
-      name: 'Bieganie',
-      icon: 'fas fa-running',
-      frequency: Frequency.MONTHLY,
-      done: 3,
-      total: 9,
-      type: GoalType.PHYSICAL,
-      points: 4
-    },
-    {
-      name: 'Siłownia',
-      icon: 'fas fa-dumbbell',
-      frequency: Frequency.WEEKLY,
-      done: 4,
-      total: 5,
-      type: GoalType.PHYSICAL,
-      points: 2
-    },
-    {
-      name: 'Fast food',
-      icon: 'fas fa-hamburger',
-      frequency: Frequency.MONTHLY,
-      done: 2,
-      total: 3,
-      type: GoalType.HEALTH,
-      points: -5
-    },
-    {
-      name: 'Papierosy',
-      icon: 'fas fa-smoking',
-      frequency: Frequency.DAILY,
-      done: 2,
-      total: 4,
-      type: GoalType.HEALTH,
-      points: -2
-    }
-  ];
+  constructor(private http: HttpClient, private userService: UserService, private authService: AuthService) {
+  }
 
   getGoals(): Goal[] {
     return this.goals.slice();
+  }
+
+  setGoals(goals: Goal[]): void {
+    this.goals = goals;
+    this.goalsChanged.next(this.goals);
   }
 
   addGoal(goal: Goal): void {
@@ -121,6 +98,40 @@ export class GoalsService {
 
   updateGoal(change: number, name: string): void {
     const updatedGoal = this.goals.find(goal => goal.name === name);
-    updatedGoal.done += change;
+    updatedGoal.doneTimes += change;
+  }
+
+  async fetchUserAndGoalsData(): Promise<void> {
+    if (this.goals.length > 0) {
+      this.goalsChanged.next(this.goals);
+      return;
+    }
+    const idToken = await this.authService.getIdToken();
+    this.http.get<UserAndGoalsData>(environment.apiUrl + '/user',
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+      data.progress.forEach(progress => {
+        progress.type = GoalType.getByName(progress.type.toString());
+      });
+      this.userService.setCharacter({
+        name: data.username,
+        avatar: data.avatar,
+        level: data.level,
+        progresses: data.progress
+      });
+      data.goals.forEach(goal => {
+        goal.type = GoalType.getByName(goal.type.toString());
+      });
+      data.goals.forEach(goal => {
+        goal.frequency = Frequency[goal.frequency];
+      });
+      this.setGoals(data.goals);
+    }, error => {
+      console.log(error);
+    });
   }
 }
