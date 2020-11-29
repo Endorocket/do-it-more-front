@@ -3,7 +3,7 @@ import { FriendsService } from '../friends.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFriendComponent } from './new-friend/new-friend.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Friend, InvitationStatus } from '../../model/friend.model';
+import { Friend, InvitationStatus } from '../friend.model';
 
 @Component({
   selector: 'app-friends-list',
@@ -19,8 +19,8 @@ export class FriendsListComponent implements OnInit {
 
   ngOnInit(): void {
     const allFriends = this.friendsService.getFriends();
-    this.acceptedFriends = allFriends.filter(friend => friend.invitationStatus === InvitationStatus.ACCEPTED);
-    this.pendingFriends = allFriends.filter(friend => friend.invitationStatus === InvitationStatus.PENDING);
+    this.acceptedFriends = allFriends.filter(friend => friend.status === InvitationStatus.ACCEPTED);
+    this.pendingFriends = allFriends.filter(friend => friend.status === InvitationStatus.INVITING);
   }
 
   openNewFriendDialog(): void {

@@ -6,7 +6,7 @@
     </span>
   </mat-card-title>
   <mat-card-content fxLayout="row" fxLayoutAlign="center center">
-    <div *ngFor="let player of sharedGoal.players" class="player-section" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngFor="let player of sharedGoal.members" class="player-section" fxLayout="column" fxLayoutAlign="center center">
       <div class="avatar-wrapper">
         <img [src]="player.avatar" alt="avatar" height="50">
       </div>
@@ -16,9 +16,9 @@
       <div class="goal-type-wrapper">
         <img [src]="sharedGoal.goal.type.iconPath" [alt]="sharedGoal.goal.type" height="30" width="30">
       </div>
-      <mat-progress-bar mode="determinate" [value]="player.donePoints * 100 / sharedGoal.goal.totalTimes"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="player.doneTimes * 100 / player.totalTimes"></mat-progress-bar>
       <div class="points-wrapper">
-        {{ player.donePoints }} / {{ sharedGoal.goal.totalTimes }}
+        {{ player.doneTimes }} / {{ player.totalTimes }}
       </div>
       <div class="frequency-wrapper">
         {{ sharedGoal.goal.frequency }}

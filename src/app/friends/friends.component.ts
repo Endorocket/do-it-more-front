@@ -11,11 +11,12 @@ export class FriendsComponent implements OnInit {
   invitationData: InvitationData;
   numberOfInvitations: number;
 
-  constructor(private friendsService: FriendsService) { }
+  constructor(private friendsService: FriendsService) {
+  }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.friendsService.fetchUserAndGoalsData();
     this.invitationData = this.friendsService.getInvitations();
     this.numberOfInvitations = this.friendsService.getNumberOfInvitations();
   }
-
 }

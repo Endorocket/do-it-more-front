@@ -14,8 +14,8 @@ export class SharedGoalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sharedGoal.players.forEach(player => {
-      player.avatar = this.avatarService.getAvatarPath(player.avatar);
+    this.sharedGoal.members.forEach(teamMember => {
+      teamMember.avatar = this.avatarService.getAvatarPath(teamMember.avatar);
     });
   }
 

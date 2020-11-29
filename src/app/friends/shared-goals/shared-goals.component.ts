@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedGoal } from './shared-goal.model';
 import { FriendsService } from '../friends.service';
-import { NewFriendComponent } from '../friends-list/new-friend/new-friend.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InviteComponent } from './invite/invite.component';
@@ -31,7 +30,7 @@ export class SharedGoalsComponent implements OnInit {
     this.friends = this.friendsService.getFriends()
       .map(character => {
         return {
-          name: character.name
+          name: character.username
         };
       });
   }

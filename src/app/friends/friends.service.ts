@@ -2,159 +2,21 @@ import { Injectable } from '@angular/core';
 import { GoalType } from '../model/goal-type.enum';
 import { SharedGoal } from './shared-goals/shared-goal.model';
 import { Frequency } from '../model/frequency.enum';
-import { Player } from './shared-goals/player.model';
 import { UserService } from '../user/user.service';
-import { Friend, InvitationStatus } from '../model/friend.model';
+import { Friend, FriendsAndTeamsData, InvitationStatus } from './friend.model';
 import { InvitationData } from './invitations/invitation-data.model';
+import { environment } from '../../environments/environment';
+import { AuthService } from '../auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class FriendsService {
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private authService: AuthService, private http: HttpClient) {
   }
 
-  private friends: Friend[] = [
-    {
-      name: 'Mateusz',
-      avatar: 'fox',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.ACCEPTED
-    },
-    {
-      name: 'Bartek',
-      avatar: 'pig',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.ACCEPTED
-    },
-    {
-      name: 'Natalia',
-      avatar: 'koala',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.ACCEPTED
-    },
-    {
-      name: 'Dominik',
-      avatar: 'hippopotamus',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.ACCEPTED
-    },
-    {
-      name: 'Dominika',
-      avatar: 'chick',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.PENDING
-    }
-  ];
+  private friends: Friend[] = [];
+  private sharedGoals: SharedGoal[] = [];
 
   private invitations: InvitationData = {
     friendRequests: [
@@ -185,92 +47,7 @@ export class FriendsService {
   }
 
   getSharedGoals(): SharedGoal[] {
-    const me: Player = {
-      name: this.userService.getUsername(),
-      avatar: this.userService.getAvatar(),
-      donePoints: 2
-    };
-
-    const sharedGoals: SharedGoal[] = [
-      {
-        goal: {
-          id: '1',
-          name: 'Bieganie',
-          icon: 'fas fa-running',
-          frequency: Frequency.MONTHLY,
-          totalTimes: 9,
-          type: GoalType.PHYSICAL,
-          points: 4
-        },
-        players: [
-          {...me},
-          {
-            name: 'Wiktoria',
-            avatar: 'whale',
-            donePoints: 3
-          }
-        ]
-      },
-      {
-        goal: {
-          id: '1',
-          name: 'Siłownia',
-          icon: 'fas fa-dumbbell',
-          frequency: Frequency.WEEKLY,
-          totalTimes: 5,
-          type: GoalType.PHYSICAL,
-          points: 2
-        },
-        players: [
-          {...me},
-          {
-            name: 'Dominik',
-            avatar: 'zebra',
-            donePoints: 3
-          }
-        ]
-      },
-      {
-        goal: {
-          id: '1',
-          name: 'Fast food',
-          icon: 'fas fa-hamburger',
-          frequency: Frequency.MONTHLY,
-          totalTimes: 3,
-          type: GoalType.HEALTH,
-          points: -5
-        },
-        players: [
-          {...me},
-          {
-            name: 'Wiktoria',
-            avatar: 'crab',
-            donePoints: 3
-          }
-        ]
-      },
-      {
-        goal: {
-          id: '1',
-          name: 'Papierosy',
-          icon: 'fas fa-smoking',
-          frequency: Frequency.DAILY,
-          totalTimes: 4,
-          type: GoalType.HEALTH,
-          points: -2
-        },
-        players: [
-          {...me},
-          {
-            name: 'Dominika',
-            avatar: 'lemur',
-            donePoints: 3
-          }
-        ]
-      }
-    ];
-
-    return sharedGoals.slice();
+    return this.sharedGoals.slice();
   }
 
   getInvitations(): InvitationData {
@@ -283,39 +60,40 @@ export class FriendsService {
 
   addFriend(username: string): boolean {
     // find friend from backend, boolean is result
-    const foundFriend: Friend = {
-      name: username,
-      avatar: 'fox',
-      level: 2,
-      progresses: [
-        {
-          type: GoalType.HEALTH,
-          achieved: 20,
-          total: 30
-        },
-        {
-          type: GoalType.PHYSICAL,
-          achieved: 10,
-          total: 30
-        },
-        {
-          type: GoalType.MENTAL,
-          achieved: 5,
-          total: 30
-        },
-        {
-          type: GoalType.CULTURAL,
-          achieved: 25,
-          total: 30
-        }
-      ],
-      invitationStatus: InvitationStatus.PENDING
-    };
-    this.friends.push(foundFriend);
     return true;
   }
 
   inviteToSharedGoal(goalName: string, username: string): void {
     // TODO
+  }
+
+  async fetchUserAndGoalsData(): Promise<void> {
+    if (this.friends.length > 0) {
+      // this.goalsChanged.next(this.goals);
+      return;
+    }
+    const idToken = await this.authService.getIdToken();
+    this.http.get<FriendsAndTeamsData>(environment.apiUrl + '/friends',
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+      data.friends.forEach(friend => {
+        friend.progress.forEach(progress => {
+          progress.type = GoalType.getByName(progress.type.toString());
+        });
+        friend.status = InvitationStatus[friend.status];
+      });
+      this.friends = data.friends;
+      data.teams.forEach(sharedGoal => {
+        sharedGoal.goal.frequency = Frequency[sharedGoal.goal.frequency];
+        sharedGoal.goal.type = GoalType.getByName(sharedGoal.goal.type.toString());
+      });
+      this.sharedGoals = data.teams;
+    }, error => {
+      console.log(error);
+    });
   }
 }

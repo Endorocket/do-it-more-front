@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AvatarService } from '../../../shared/avatar.service';
-import { Friend } from '../../../model/friend.model';
+import { Friend } from '../../friend.model';
 
 @Component({
   selector: 'app-friends-item',
