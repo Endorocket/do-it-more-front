@@ -3,11 +3,12 @@ import { GoalType } from '../model/goal-type.enum';
 import { SharedGoal } from './shared-goals/shared-goal.model';
 import { Frequency } from '../model/frequency.enum';
 import { UserService } from '../user/user.service';
-import { Friend, FriendsAndTeamsData, InvitationStatus } from './friend.model';
-import { InvitationData } from './invitations/invitation-data.model';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+import { Friend, FriendsAndTeamsData, InvitationStatus } from './friend.model';
+import { InvitationData } from './invitations/invitation-data.model';
 
 @Injectable({providedIn: 'root'})
 export class FriendsService {
@@ -42,8 +43,16 @@ export class FriendsService {
     ]
   };
 
+  friendsChanged = new Subject<Friend[]>();
+  addFriendCompleted = new Subject<boolean>();
+
   getFriends(): Friend[] {
     return this.friends.slice();
+  }
+
+  setFriends(friends: Friend[]): void {
+    this.friends = friends;
+    this.friendsChanged.next(this.getFriends());
   }
 
   getSharedGoals(): SharedGoal[] {
@@ -58,20 +67,36 @@ export class FriendsService {
     return this.invitations.friendRequests.length + this.invitations.goalInvitations.length;
   }
 
-  addFriend(username: string): boolean {
-    // find friend from backend, boolean is result
-    return true;
+  async addFriend(username: string): Promise<void> {
+    const idToken = await this.authService.getIdToken();
+    this.http.post(environment.apiUrl + '/friends',
+      {
+        friendUsername: username
+      }, {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+      this.addFriendCompleted.next(true);
+      this.fetchFriendsAndTeams(true);
+    }, error => {
+      console.log(error);
+      this.addFriendCompleted.next(false);
+    });
   }
 
   inviteToSharedGoal(goalName: string, username: string): void {
     // TODO
   }
 
-  async fetchUserAndGoalsData(): Promise<void> {
-    if (this.friends.length > 0) {
-      // this.goalsChanged.next(this.goals);
+  async fetchFriendsAndTeams(forceFetch: boolean = false): Promise<void> {
+    if (this.friends.length > 0 && !forceFetch) {
+      console.log('not fetching');
+      this.friendsChanged.next(this.getFriends());
       return;
     }
+    console.log('fetching');
     const idToken = await this.authService.getIdToken();
     this.http.get<FriendsAndTeamsData>(environment.apiUrl + '/friends',
       {
@@ -86,7 +111,7 @@ export class FriendsService {
         });
         friend.status = InvitationStatus[friend.status];
       });
-      this.friends = data.friends;
+      this.setFriends(data.friends);
       data.teams.forEach(sharedGoal => {
         sharedGoal.goal.frequency = Frequency[sharedGoal.goal.frequency];
         sharedGoal.goal.type = GoalType.getByName(sharedGoal.goal.type.toString());

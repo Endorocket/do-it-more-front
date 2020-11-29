@@ -15,7 +15,7 @@ export class FriendsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    await this.friendsService.fetchUserAndGoalsData();
+    await this.friendsService.fetchFriendsAndTeams();
     this.invitationData = this.friendsService.getInvitations();
     this.numberOfInvitations = this.friendsService.getNumberOfInvitations();
   }

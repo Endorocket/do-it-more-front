@@ -1,38 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FriendsService } from '../friends.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewFriendComponent } from './new-friend/new-friend.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Friend, InvitationStatus } from '../friend.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-friends-list',
   templateUrl: './friends-list.component.html',
   styleUrls: ['./friends-list.component.css']
 })
-export class FriendsListComponent implements OnInit {
+export class FriendsListComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   acceptedFriends: Friend[];
   pendingFriends: Friend[];
 
-  constructor(private friendsService: FriendsService, private dialog: MatDialog, private snackBar: MatSnackBar) {
+  constructor(private friendsService: FriendsService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
     const allFriends = this.friendsService.getFriends();
     this.acceptedFriends = allFriends.filter(friend => friend.status === InvitationStatus.ACCEPTED);
     this.pendingFriends = allFriends.filter(friend => friend.status === InvitationStatus.INVITING);
+    this.subscription = this.friendsService.friendsChanged.subscribe((friends: Friend[]) => {
+      this.acceptedFriends = friends.filter(friend => friend.status === InvitationStatus.ACCEPTED);
+      this.pendingFriends = friends.filter(friend => friend.status === InvitationStatus.INVITING);
+    });
   }
 
   openNewFriendDialog(): void {
-    const dialogRef = this.dialog.open(NewFriendComponent, {
+    this.dialog.open(NewFriendComponent, {
       width: '400px'
     });
-    dialogRef.afterClosed().subscribe((username: string) => {
-      if (username) {
-        this.snackBar.open('Wysłano zaproszenie do użytkownika: ' + username, null, {
-          duration: 2000,
-        });
-      }
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
