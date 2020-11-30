@@ -5,7 +5,7 @@
         <div *ngFor="let goalsByType of availableGoalsByTypes ">
           <h4>
             <span>{{ getTypeName(goalsByType.type) }}</span>
-            <img [src]="goalsByType.type.iconPath" [alt]="goalsByType.type" height="30" width="30">
+            <img [src]="goalsByType.type.iconPath" [alt]="goalsByType.type" class="goal-type-icon" height="30" width="30">
           </h4>
           <mat-chip-list aria-label="Goal selection">
             <mat-chip *ngFor="let goal of goalsByType.goals" (click)="onSelectGoal(goal, goalsByType.type)">

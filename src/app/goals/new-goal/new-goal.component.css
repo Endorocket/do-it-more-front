@@ -38,3 +38,9 @@ button {
 .number-form-field {
   max-width: 120px;
 }
+
+.goal-type-icon {
+  margin-top: 20px;
+  margin-bottom: -8px;
+  margin-left: 10px;
+}

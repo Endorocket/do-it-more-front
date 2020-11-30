@@ -48,7 +48,11 @@ export class NewGoalComponent implements OnInit {
     this.firstFormGroup.controls.goalName.setValue(availableGoal.name);
     this.firstFormGroup.controls.imagePath.setValue(availableGoal.icon);
     this.secondFormGroup.controls.category.setValue(type);
-    this.pointsOptions = [-1, -2, -3, -5];
+    if (type === GoalType.HEALTH) {
+      this.pointsOptions = [-1, -2, -3, -5];
+    } else {
+      this.pointsOptions = [1, 2, 3, 5];
+    }
   }
 
   async onSubmit(): Promise<void> {
