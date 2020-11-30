@@ -24,14 +24,20 @@ export class NewGoalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.availableGoalsByTypes = this.goalsService.getAvailableGoals();
+    this.availableGoalsByTypes = this.goalsService.getAvailableGoals()
+      .map(availableByType => {
+        return {
+          type: availableByType.type,
+          goals: availableByType.goals.filter(availableGoal => this.goalsService.getGoals().filter(myGoal => myGoal.name === availableGoal.name).length === 0)
+        };
+      });
 
     this.firstFormGroup = new FormGroup({
       goalName: new FormControl('', Validators.required),
       imagePath: new FormControl('', Validators.required)
     });
     this.secondFormGroup = new FormGroup({
-      frequencyNumber: new FormControl('', Validators.required),
+      frequencyNumber: new FormControl('', [Validators.required, Validators.min(1)]),
       frequencyType: new FormControl('', Validators.required),
       category: new FormControl('', Validators.required),
       points: new FormControl('', Validators.required)
@@ -42,13 +48,14 @@ export class NewGoalComponent implements OnInit {
     this.firstFormGroup.controls.goalName.setValue(availableGoal.name);
     this.firstFormGroup.controls.imagePath.setValue(availableGoal.icon);
     this.secondFormGroup.controls.category.setValue(type);
+    this.pointsOptions = [-1, -2, -3, -5];
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     console.log(this.firstFormGroup.value);
     console.log(this.secondFormGroup.value);
 
-    this.goalsService.addGoal({
+    await this.goalsService.addGoal({
       name: this.firstFormGroup.value.goalName,
       icon: this.firstFormGroup.value.imagePath,
       frequency: this.secondFormGroup.value.frequencyType,
@@ -59,5 +66,18 @@ export class NewGoalComponent implements OnInit {
     });
 
     this.router.navigate(['/goals']);
+  }
+
+  getTypeName(goalType: GoalType): string {
+    switch (goalType) {
+      case GoalType.HEALTH:
+        return 'Negatywne nawyki';
+      case GoalType.PHYSICAL:
+        return 'Fizyczne';
+      case GoalType.MENTAL:
+        return 'Aktywność umysłowa';
+      case GoalType.CULTURAL:
+        return 'Kulturowe';
+    }
   }
 }

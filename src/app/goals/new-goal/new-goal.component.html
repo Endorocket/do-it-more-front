@@ -4,7 +4,7 @@
       <form [formGroup]="firstFormGroup">
         <div *ngFor="let goalsByType of availableGoalsByTypes ">
           <h4>
-            <span>{{ goalsByType.type.name }}</span>
+            <span>{{ getTypeName(goalsByType.type) }}</span>
             <img [src]="goalsByType.type.iconPath" [alt]="goalsByType.type" height="30" width="30">
           </h4>
           <mat-chip-list aria-label="Goal selection">
@@ -45,7 +45,7 @@
           <div class="form-group">
             <div class="form-label">Kategoria</div>
             <mat-radio-group aria-label="Select category" formControlName="category">
-              <mat-radio-button *ngFor="let categoryOption of categoryOptions" [value]="categoryOption">
+              <mat-radio-button *ngFor="let categoryOption of categoryOptions" [value]="categoryOption" disabled>
                 <img [src]="categoryOption.iconPath" height="30" width="30">
               </mat-radio-button>
             </mat-radio-group>
@@ -63,7 +63,7 @@
 
         <div class="navigation-buttons">
           <button mat-button matStepperPrevious>Cofnij</button>
-          <button type="submit" mat-button matStepperNext>Potwiedź</button>
+          <button type="submit" mat-button matStepperNext [disabled]="!secondFormGroup.valid">Potwiedź</button>
         </div>
       </form>
     </mat-step>

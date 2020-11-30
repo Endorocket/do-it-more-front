@@ -34,3 +34,7 @@ mat-radio-button {
 button {
   text-transform: uppercase;
 }
+
+.number-form-field {
+  max-width: 120px;
+}

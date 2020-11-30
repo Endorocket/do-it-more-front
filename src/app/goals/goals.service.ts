@@ -28,8 +28,28 @@ export class GoalsService {
     this.goalsChanged.next(this.goals);
   }
 
-  addGoal(goal: Goal): void {
-    this.goals.push(goal);
+  async addGoal(goal: Goal): Promise<void> {
+    const idToken = await AuthService.getIdToken();
+    const frequency = goal.frequency === Frequency.MONTHLY ? 'MONTHLY' : goal.frequency === Frequency.WEEKLY ? 'WEEKLY' : 'DAILY';
+    this.http.post(environment.apiUrl + '/goals',
+      {
+        goalName: goal.name,
+        goalType: goal.type.name,
+        icon: goal.icon,
+        frequency,
+        totalTimes: goal.totalTimes,
+        points: goal.points
+      },
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+      this.fetchUserAndGoalsData(true);
+    }, error => {
+      console.log(error);
+    });
   }
 
   getAvailableGoals(): AvailableGoalsByType[] {
@@ -48,6 +68,10 @@ export class GoalsService {
           {
             name: 'Bieganie',
             icon: 'fas fa-running'
+          },
+          {
+            name: 'Pierwsze śniadanie',
+            icon: 'fas fa-egg'
           }
         ]
       },
@@ -78,6 +102,10 @@ export class GoalsService {
           {
             name: 'Kościół',
             icon: 'fas fa-church'
+          },
+          {
+            name: 'Podróż',
+            icon: 'fas fa-caravan'
           }
         ]
       },
@@ -91,6 +119,10 @@ export class GoalsService {
           {
             name: 'Papierosy',
             icon: 'fas fa-smoking'
+          },
+          {
+            name: 'Słodycze',
+            icon: 'fas fa-cookie-bite'
           }
         ]
       }
@@ -117,8 +149,8 @@ export class GoalsService {
     });
   }
 
-  async fetchUserAndGoalsData(): Promise<void> {
-    if (this.goals.length > 0) {
+  async fetchUserAndGoalsData(forceFetch: boolean = false): Promise<void> {
+    if (this.goals.length > 0 && !forceFetch) {
       console.log('fetchUserAndGoalsData NOT FETCHED');
       this.goalsChanged.next(this.goals);
       return;

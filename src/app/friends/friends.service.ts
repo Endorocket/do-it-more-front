@@ -152,6 +152,7 @@ export class FriendsService {
     const sentInvitationTeams: SharedGoal[] = [];
     const incomingInvitationTeams: SharedGoal[] = [];
     for (const team of data.teams) {
+      console.log(team);
       team.goal.frequency = Frequency[team.goal.frequency];
       team.goal.type = GoalType.getByName(team.goal.type.toString());
       for (const member of team.members) {
