@@ -103,9 +103,11 @@ export class GoalsService {
 
   async fetchUserAndGoalsData(): Promise<void> {
     if (this.goals.length > 0) {
+      console.log('fetchUserAndGoalsData NOT FETCHED');
       this.goalsChanged.next(this.goals);
       return;
     }
+    console.log('fetchUserAndGoalsData FETCHED');
     const idToken = await this.authService.getIdToken();
     this.http.get<UserAndGoalsData>(environment.apiUrl + '/user',
       {

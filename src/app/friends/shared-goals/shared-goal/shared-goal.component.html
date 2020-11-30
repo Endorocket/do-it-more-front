@@ -5,24 +5,39 @@
       <i class="fa-2x" [class]="sharedGoal.goal.icon"></i>
     </span>
   </mat-card-title>
-  <mat-card-content fxLayout="row" fxLayoutAlign="center center">
-    <div *ngFor="let player of sharedGoal.members" class="player-section" fxLayout="column" fxLayoutAlign="center center">
-      <div class="avatar-wrapper">
-        <img [src]="player.avatar" alt="avatar" height="50">
-      </div>
-      <div class="player-name-wrapper">
-        {{ player.name }}
-      </div>
-      <div class="goal-type-wrapper">
-        <img [src]="sharedGoal.goal.type.iconPath" [alt]="sharedGoal.goal.type" height="30" width="30">
-      </div>
-      <mat-progress-bar mode="determinate" [value]="player.doneTimes * 100 / player.totalTimes"></mat-progress-bar>
-      <div class="points-wrapper">
-        {{ player.doneTimes }} / {{ player.totalTimes }}
-      </div>
-      <div class="frequency-wrapper">
-        {{ sharedGoal.goal.frequency }}
+  <mat-card-content fxLayout="row" fxLayoutAlign="center center" *ngIf="accepted; else pending">
+    <div *ngFor="let player of sharedGoal.members" class="player-section">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="avatar-wrapper">
+          <img [src]="avatarPathByUsername.get(player.name)" alt="avatar" height="50">
+        </div>
+        <div class="player-name-wrapper">
+          {{ player.name }}
+        </div>
+        <div class="goal-type-wrapper">
+          <img [src]="sharedGoal.goal.type.iconPath" [alt]="sharedGoal.goal.type" height="30" width="30">
+        </div>
+        <mat-progress-bar mode="determinate" [value]="player.doneTimes * 100 / player.totalTimes"></mat-progress-bar>
+        <div class="points-wrapper">
+          {{ player.doneTimes }} / {{ player.totalTimes }}
+        </div>
+        <div class="frequency-wrapper">
+          {{ sharedGoal.goal.frequency }}
+        </div>
       </div>
     </div>
   </mat-card-content>
+  <ng-template #pending>
+    <div *ngFor="let player of invitedMembers">
+      <div fxLayout="row">
+        <div fxFlex="40" fxLayout="column" fxLayoutAlign="center center">
+          <img [src]="avatarPathByUsername.get(player.name)" alt="avatar" height="75">
+        </div>
+        <div fxFlex="60" fxLayout="column" fxLayoutAlign="center center">
+          <h2 class="player-name">{{ player.name }}</h2>
+        </div>
+      </div>
+      <h2 class="invited-text">Wysłano zaproszenie</h2>
+    </div>
+  </ng-template>
 </mat-card>

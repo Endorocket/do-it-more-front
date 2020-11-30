@@ -28,9 +28,9 @@ import { UserComponent } from './user/user.component';
 import { NewFriendComponent } from './friends/friends-list/new-friend/new-friend.component';
 import { InviteComponent } from './friends/shared-goals/invite/invite.component';
 import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.component';
-import { InvitationsComponent } from './friends/invitations/invitations.component';
-import { FriendRequestComponent } from './friends/invitations/friend-request/friend-request.component';
-import { GoalInvitationComponent } from './friends/invitations/goal-invitation/goal-invitation.component';
+import { InvitationsComponent } from './friends/incoming-invitations/invitations.component';
+import { FriendRequestComponent } from './friends/incoming-invitations/friend-request/friend-request.component';
+import { GoalInvitationComponent } from './friends/incoming-invitations/goal-invitation/goal-invitation.component';
 
 Amplify.configure({
   Auth: {

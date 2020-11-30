@@ -9,7 +9,7 @@
     </div>
   </mat-card-title>
   <mat-card-actions align="end">
-    <button mat-button>Odrzuć</button>
-    <button mat-raised-button color="primary">Akceptuj</button>
+    <button mat-button (click)="onReject()">Odrzuć</button>
+    <button mat-raised-button color="primary" (click)="onAccept()">Akceptuj</button>
   </mat-card-actions>
 </mat-card>

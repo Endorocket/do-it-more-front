@@ -1,5 +1,9 @@
 <section>
-  <app-shared-goal *ngFor="let sharedGoal of sharedGoals" [sharedGoal]="sharedGoal"></app-shared-goal>
+  <div>
+  <app-shared-goal *ngFor="let sharedGoal of acceptedTeams" [sharedGoal]="sharedGoal" [accepted]="true"></app-shared-goal>
+  <mat-divider *ngIf="sentInvitationTeams.length > 0 && acceptedTeams.length > 0"></mat-divider>
+  <app-shared-goal *ngFor="let sharedGoal of sentInvitationTeams" [sharedGoal]="sharedGoal" [accepted]="false"></app-shared-goal>
+  </div>
   <div fxLayout fxLayoutAlign="center center">
     <mat-icon id="invite-to-goal" (click)="openInviteDialog()" aria-hidden="false" aria-label="Invite to goal" color="accent">add_circle</mat-icon>
   </div>

@@ -19,13 +19,15 @@ export class FriendsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const allFriends = this.friendsService.getFriends();
-    this.acceptedFriends = allFriends.filter(friend => friend.status === InvitationStatus.ACCEPTED);
-    this.pendingFriends = allFriends.filter(friend => friend.status === InvitationStatus.INVITING);
-    this.subscription = this.friendsService.friendsChanged.subscribe((friends: Friend[]) => {
-      this.acceptedFriends = friends.filter(friend => friend.status === InvitationStatus.ACCEPTED);
-      this.pendingFriends = friends.filter(friend => friend.status === InvitationStatus.INVITING);
+    this.loadData();
+    this.subscription = this.friendsService.friendsChanged.subscribe(() => {
+      this.loadData();
     });
+  }
+
+  private loadData(): void {
+    this.acceptedFriends = this.friendsService.getFriendsByStatus(InvitationStatus.ACCEPTED);
+    this.pendingFriends = this.friendsService.getFriendsByStatus(InvitationStatus.INVITED);
   }
 
   openNewFriendDialog(): void {

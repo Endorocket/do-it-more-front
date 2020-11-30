@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { GoalType } from '../model/goal-type.enum';
-import { SharedGoal } from './shared-goals/shared-goal.model';
+import { MemberStatus, SharedGoal } from './shared-goals/shared-goal.model';
 import { Frequency } from '../model/frequency.enum';
 import { UserService } from '../user/user.service';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../auth/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-import { Friend, FriendsAndTeamsData, InvitationStatus } from './friend.model';
-import { InvitationData } from './invitations/invitation-data.model';
+import { Friend, FriendsAndTeamsData, InvitationResponse, InvitationStatus } from './friend.model';
 
 @Injectable({providedIn: 'root'})
 export class FriendsService {
@@ -17,54 +16,64 @@ export class FriendsService {
   }
 
   private friends: Friend[] = [];
-  private sharedGoals: SharedGoal[] = [];
+  private acceptedTeams: SharedGoal[] = [];
+  private sentInvitationTeams: SharedGoal[] = [];
+  private incomingInvitationTeams: SharedGoal[] = [];
 
-  private invitations: InvitationData = {
-    friendRequests: [
-      {
-        senderName: 'Piotr',
-        senderAvatar: 'fox'
-      }
-    ],
-    goalInvitations: [
-      {
-        senderName: 'Damian',
-        senderAvatar: 'fox',
-        goal: {
-          id: '1',
-          name: 'Siłownia',
-          icon: 'fas fa-dumbbell',
-          frequency: Frequency.WEEKLY,
-          totalTimes: 5,
-          type: GoalType.PHYSICAL,
-          points: 2
-        },
-      }
-    ]
-  };
+  friendsChanged = new Subject<void>();
+  teamsChanged = new Subject<void>();
+  incomingInvitationTeamsChanged = new Subject<void>();
 
-  friendsChanged = new Subject<Friend[]>();
   addFriendCompleted = new Subject<boolean>();
+  inviteToSharedGoalCompleted = new Subject<boolean>();
+  respondToFriendInvitationCompleted = new Subject<boolean>();
+  respondToTeamInvitationCompleted = new Subject<boolean>();
 
-  getFriends(): Friend[] {
-    return this.friends.slice();
+  getFriendsByStatus(invitationStatus: InvitationStatus): Friend[] {
+    return this.friends.slice().filter(friend => friend.status === invitationStatus);
   }
 
   setFriends(friends: Friend[]): void {
     this.friends = friends;
-    this.friendsChanged.next(this.getFriends());
+    this.friendsChanged.next();
   }
 
-  getSharedGoals(): SharedGoal[] {
-    return this.sharedGoals.slice();
+  getAcceptedTeams(): SharedGoal[] {
+    return this.acceptedTeams.slice();
   }
 
-  getInvitations(): InvitationData {
-    return {...this.invitations};
+  setAcceptedTeams(acceptedTeams: SharedGoal[]): void {
+    this.acceptedTeams = acceptedTeams;
+    this.teamsChanged.next();
+  }
+
+  getSentInvitationTeams(): SharedGoal[] {
+    return this.sentInvitationTeams.slice();
+  }
+
+  setSentInvitationTeams(sentInvitationTeams: SharedGoal[]): void {
+    this.sentInvitationTeams = sentInvitationTeams;
+    this.teamsChanged.next();
+  }
+
+  getIncomingInvitationTeams(): SharedGoal[] {
+    return this.incomingInvitationTeams.slice();
+  }
+
+  setIncomingInvitationTeams(incomingInvitationTeams: SharedGoal[]): void {
+    this.incomingInvitationTeams = incomingInvitationTeams;
+    this.incomingInvitationTeamsChanged.next();
   }
 
   getNumberOfInvitations(): number {
-    return this.invitations.friendRequests.length + this.invitations.goalInvitations.length;
+    return this.getFriendsByStatus(InvitationStatus.INVITING).length + this.getIncomingInvitationTeams().length;
+  }
+
+  getSharedGoalNames(): string[] {
+    return [
+      ...this.sentInvitationTeams.map(team => team.goal.name),
+      ...this.acceptedTeams.map(team => team.goal.name)
+    ];
   }
 
   async addFriend(username: string): Promise<void> {
@@ -86,14 +95,30 @@ export class FriendsService {
     });
   }
 
-  inviteToSharedGoal(goalName: string, username: string): void {
-    // TODO
+  async inviteToSharedGoal(goalId: string, username: string): Promise<void> {
+    const idToken = await this.authService.getIdToken();
+    this.http.post(environment.apiUrl + '/teams',
+      {
+        goalId,
+        friendUsername: username
+      }, {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+      this.inviteToSharedGoalCompleted.next(true);
+      this.fetchFriendsAndTeams(true);
+    }, error => {
+      console.log(error);
+      this.inviteToSharedGoalCompleted.next(false);
+    });
   }
 
   async fetchFriendsAndTeams(forceFetch: boolean = false): Promise<void> {
     if (this.friends.length > 0 && !forceFetch) {
       console.log('not fetching');
-      this.friendsChanged.next(this.getFriends());
+      this.friendsChanged.next();
       return;
     }
     console.log('fetching');
@@ -105,20 +130,86 @@ export class FriendsService {
         }
       }).subscribe(data => {
       console.log(data);
-      data.friends.forEach(friend => {
-        friend.progress.forEach(progress => {
-          progress.type = GoalType.getByName(progress.type.toString());
-        });
-        friend.status = InvitationStatus[friend.status];
-      });
-      this.setFriends(data.friends);
-      data.teams.forEach(sharedGoal => {
-        sharedGoal.goal.frequency = Frequency[sharedGoal.goal.frequency];
-        sharedGoal.goal.type = GoalType.getByName(sharedGoal.goal.type.toString());
-      });
-      this.sharedGoals = data.teams;
+      this.saveFriendsFromResponse(data);
+      this.saveTeamsFromResponse(data);
     }, error => {
       console.log(error);
+    });
+  }
+
+  private saveFriendsFromResponse(data: FriendsAndTeamsData): void {
+    data.friends.forEach(friend => {
+      friend.progress.forEach(progress => {
+        progress.type = GoalType.getByName(progress.type.toString());
+      });
+      friend.status = InvitationStatus[friend.status];
+    });
+    this.setFriends(data.friends);
+  }
+
+  private saveTeamsFromResponse(data: FriendsAndTeamsData): void {
+    const acceptedTeams: SharedGoal[] = [];
+    const sentInvitationTeams: SharedGoal[] = [];
+    const incomingInvitationTeams: SharedGoal[] = [];
+    for (const team of data.teams) {
+      team.goal.frequency = Frequency[team.goal.frequency];
+      team.goal.type = GoalType.getByName(team.goal.type.toString());
+      for (const member of team.members) {
+        member.status = MemberStatus[member.status];
+      }
+      if (team.members.filter(member => member.status === MemberStatus.INVITED && member.name === this.userService.getUsername()).length > 0) {
+        console.log('incomingInvitationTeams', team);
+        incomingInvitationTeams.push(team);
+      } else if (team.members.filter(member => member.status === MemberStatus.INVITED && member.name !== this.userService.getUsername()).length > 0) {
+        console.log('sentInvitationTeams', team);
+        sentInvitationTeams.push(team);
+      } else {
+        console.log('acceptedTeams', team);
+        acceptedTeams.push(team);
+      }
+    }
+    this.setAcceptedTeams(acceptedTeams);
+    this.setSentInvitationTeams(sentInvitationTeams);
+    this.setIncomingInvitationTeams(incomingInvitationTeams);
+  }
+
+  async respondToFriendInvitation(friendUsername: string, invitationResponse: InvitationResponse): Promise<void> {
+    const idToken = await this.authService.getIdToken();
+    this.http.post(`${environment.apiUrl}/friends/${friendUsername}/respond`,
+      {
+        invitationResponse
+      },
+      {
+        headers: {
+          Authorization: idToken
+        },
+      }).subscribe(data => {
+      console.log(data);
+      this.fetchFriendsAndTeams(true);
+      this.respondToFriendInvitationCompleted.next(true);
+    }, error => {
+      console.log(error);
+      this.respondToFriendInvitationCompleted.next(false);
+    });
+  }
+
+  async respondToTeamInvitation(teamId: string, invitationResponse: InvitationResponse): Promise<void> {
+    const idToken = await this.authService.getIdToken();
+    this.http.post(`${environment.apiUrl}/teams/${teamId}/respond`,
+      {
+        invitationResponse
+      },
+      {
+        headers: {
+          Authorization: idToken
+        },
+      }).subscribe(data => {
+      console.log(data);
+      this.fetchFriendsAndTeams(true);
+      this.respondToTeamInvitationCompleted.next(true);
+    }, error => {
+      console.log(error);
+      this.respondToTeamInvitationCompleted.next(false);
     });
   }
 }

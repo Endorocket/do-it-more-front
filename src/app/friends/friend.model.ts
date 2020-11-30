@@ -19,3 +19,8 @@ export interface FriendsAndTeamsData {
   friends: Friend[];
   teams: SharedGoal[];
 }
+
+export enum InvitationResponse {
+  ACCEPT = 'ACCEPT',
+  REJECT = 'REJECT'
+}

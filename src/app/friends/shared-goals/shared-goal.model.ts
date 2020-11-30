@@ -17,7 +17,12 @@ export interface TeamGoal {
 export interface TeamMember {
   name: string;
   avatar: string;
-  status: string;
+  status: MemberStatus;
   doneTimes?: number;
   totalTimes?: number;
+}
+
+export enum MemberStatus {
+  MEMBER = 'MEMBER',
+  INVITED = 'INVITED'
 }

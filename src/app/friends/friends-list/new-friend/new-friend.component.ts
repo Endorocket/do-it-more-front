@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FriendsService } from '../../friends.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FriendsService } from '../../friends.service';
 
 @Component({
   selector: 'app-new-friend',

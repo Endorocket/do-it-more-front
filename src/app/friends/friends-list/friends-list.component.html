@@ -2,7 +2,7 @@
   <div>
     <app-friends-item *ngFor="let friend of acceptedFriends" [friend]="friend"></app-friends-item>
   </div>
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="pendingFriends.length > 0 && acceptedFriends.length > 0"></mat-divider>
   <div>
     <app-friends-item *ngFor="let friend of pendingFriends" [friend]="friend"></app-friends-item>
   </div>

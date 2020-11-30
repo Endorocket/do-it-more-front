@@ -50,3 +50,12 @@ mat-progress-bar {
 .goal-icon {
   font-size: 40px;
 }
+
+.player-name {
+  margin: 0;
+}
+
+.invited-text {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
