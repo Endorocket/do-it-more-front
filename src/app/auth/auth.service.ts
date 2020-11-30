@@ -7,11 +7,17 @@ import { Auth } from 'aws-amplify';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
+
+  constructor(private router: Router, private userService: UserService) {
+  }
   authChange = new Subject<boolean>();
   private isAuthenticated = false;
   private authData: AuthData;
 
-  constructor(private router: Router, private userService: UserService) {
+  static async getIdToken(): Promise<string> {
+    // Auth.currentSession() checks if token is expired and refreshes with Cognito if needed automatically
+    const session = await Auth.currentSession();
+    return session.getIdToken().getJwtToken();
   }
 
   async login(authData: AuthData): Promise<void> {
@@ -66,7 +72,7 @@ export class AuthService {
   }
 
   async autoLogin(): Promise<void> {
-    const idToken: string = await this.getIdToken();
+    const idToken: string = await AuthService.getIdToken();
     if (!idToken) {
       this.authChange.next(false);
       return;
@@ -79,11 +85,5 @@ export class AuthService {
     console.log(currentUserInfo);
     this.userService.setEmail(currentUserInfo.attributes.email);
     this.router.navigate(['/goals']);
-  }
-
-  async getIdToken(): Promise<string> {
-    // Auth.currentSession() checks if token is expired and refreshes with Cognito if needed automatically
-    const session = await Auth.currentSession();
-    return session.getIdToken().getJwtToken();
   }
 }

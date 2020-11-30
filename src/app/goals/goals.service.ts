@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
+
+import { environment } from '../../environments/environment';
 import { Goal } from '../model/goal.model';
 import { GoalType } from '../model/goal-type.enum';
 import { AvailableGoalsByType } from './available-goal.model';
-import { Subject } from 'rxjs';
 import { UserAndGoalsData } from './user-and-goals-data.model';
-import { environment } from '../../environments/environment';
 import { Frequency } from '../model/frequency.enum';
-import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
 import { AuthService } from '../auth/auth.service';
 
@@ -15,7 +16,7 @@ export class GoalsService {
   private goals: Goal[] = [];
   goalsChanged = new Subject<Goal[]>();
 
-  constructor(private http: HttpClient, private userService: UserService, private authService: AuthService) {
+  constructor(private http: HttpClient, private userService: UserService) {
   }
 
   getGoals(): Goal[] {
@@ -96,9 +97,24 @@ export class GoalsService {
     ];
   }
 
-  updateGoal(change: number, name: string): void {
-    const updatedGoal = this.goals.find(goal => goal.name === name);
+  async updateGoal(change: number, goalId: string): Promise<void> {
+    const updatedGoal = this.goals.find(goal => goal.id === goalId);
     updatedGoal.doneTimes += change;
+
+    const idToken = await AuthService.getIdToken();
+    this.http.patch(`${environment.apiUrl}/goals/${goalId}`,
+      {
+        times: change
+      },
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
   }
 
   async fetchUserAndGoalsData(): Promise<void> {
@@ -108,7 +124,7 @@ export class GoalsService {
       return;
     }
     console.log('fetchUserAndGoalsData FETCHED');
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.get<UserAndGoalsData>(environment.apiUrl + '/user',
       {
         headers: {
@@ -117,6 +133,7 @@ export class GoalsService {
       }).subscribe(data => {
       console.log(data);
       data.progress.forEach(progress => {
+        console.log(progress.type);
         progress.type = GoalType.getByName(progress.type.toString());
       });
       this.userService.setCharacter({

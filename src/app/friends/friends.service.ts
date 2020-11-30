@@ -77,7 +77,7 @@ export class FriendsService {
   }
 
   async addFriend(username: string): Promise<void> {
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.post(environment.apiUrl + '/friends',
       {
         friendUsername: username
@@ -96,7 +96,7 @@ export class FriendsService {
   }
 
   async inviteToSharedGoal(goalId: string, username: string): Promise<void> {
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.post(environment.apiUrl + '/teams',
       {
         goalId,
@@ -122,7 +122,7 @@ export class FriendsService {
       return;
     }
     console.log('fetching');
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.get<FriendsAndTeamsData>(environment.apiUrl + '/friends',
       {
         headers: {
@@ -174,7 +174,7 @@ export class FriendsService {
   }
 
   async respondToFriendInvitation(friendUsername: string, invitationResponse: InvitationResponse): Promise<void> {
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.post(`${environment.apiUrl}/friends/${friendUsername}/respond`,
       {
         invitationResponse
@@ -194,7 +194,7 @@ export class FriendsService {
   }
 
   async respondToTeamInvitation(teamId: string, invitationResponse: InvitationResponse): Promise<void> {
-    const idToken = await this.authService.getIdToken();
+    const idToken = await AuthService.getIdToken();
     this.http.post(`${environment.apiUrl}/teams/${teamId}/respond`,
       {
         invitationResponse

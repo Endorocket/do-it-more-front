@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { Character } from '../model/character.model';
 import { GoalType } from '../model/goal-type.enum';
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class UserService {
 
   private character: Character = null;
   characterChanged = new Subject<Character>();
+
+  constructor(private http: HttpClient) {
+  }
 
   private email: string;
 
@@ -48,7 +54,7 @@ export class UserService {
     this.character.avatar = avatar;
   }
 
-  updatePoints(changePoints: number, goalType: GoalType): void {
+  async updatePoints(changePoints: number, goalType: GoalType): Promise<void> {
     const changedProgress = this.character.progresses.find(progress => progress.type === goalType);
     changedProgress.achieved += changePoints;
     if (changePoints > 0 && changedProgress.achieved > changedProgress.total) {
@@ -61,5 +67,29 @@ export class UserService {
     if (this.character.level <= 0) {
       this.character.level = 1;
     }
+    this.characterChanged.next(this.getCharacter());
+
+    const idToken = await AuthService.getIdToken();
+    this.http.put(environment.apiUrl + '/user/progress',
+      {
+        level: this.character.level,
+        progress: this.character.progresses.map(progressItem => {
+          return {
+            type: progressItem.type.name,
+            achieved: progressItem.achieved,
+            total: progressItem.total
+          };
+        })
+      },
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      }
+    );
   }
 }
