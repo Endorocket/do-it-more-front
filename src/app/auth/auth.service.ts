@@ -20,6 +20,11 @@ export class AuthService {
     return session.getIdToken().getJwtToken();
   }
 
+  static async getUsername(): Promise<string> {
+    const userInfo = await Auth.currentUserInfo();
+    return userInfo.username;
+  }
+
   async login(authData: AuthData): Promise<void> {
     try {
       const user = await Auth.signIn(authData.username, authData.password);

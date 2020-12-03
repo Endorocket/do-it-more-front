@@ -185,4 +185,33 @@ export class GoalsService {
       console.log(error);
     });
   }
+
+  async updatePeriodsAndFetchUserGoalsData(): Promise<void> {
+    const idToken = await AuthService.getIdToken();
+    const username = await AuthService.getUsername();
+
+    const now = new Date();
+    const updatePeriodsPattern = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+    const updatePeriodsKey = `updatePeriodsDate-${username}`;
+    const item = localStorage.getItem(updatePeriodsKey);
+    if (item !== null && item === updatePeriodsPattern) {
+      console.log('Znaleziono updatePeriodsDate o wartości: ' + updatePeriodsPattern);
+      await this.fetchUserAndGoalsData();
+      return;
+    }
+    console.log('NIE znaleziono updatePeriodsDate: ' + updatePeriodsPattern);
+    localStorage.setItem(updatePeriodsKey, updatePeriodsPattern);
+    this.http.post(environment.apiUrl + '/periods',
+      {},
+      {
+        headers: {
+          Authorization: idToken
+        }
+      }).subscribe(result => {
+      console.log(result);
+      this.fetchUserAndGoalsData();
+    }, error => {
+      console.log(error);
+    });
+  }
 }

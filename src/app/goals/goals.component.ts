@@ -23,7 +23,8 @@ export class GoalsComponent implements OnInit, OnDestroy {
           this.goals = goals;
         }
       );
-    await this.goalsService.fetchUserAndGoalsData();
+    await this.goalsService.updatePeriodsAndFetchUserGoalsData();
+    // await this.goalsService.fetchUserAndGoalsData();
     // this.goals = this.goalsService.getGoals();
     this.isLoading = false;
   }
