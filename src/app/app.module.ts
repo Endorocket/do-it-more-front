@@ -31,6 +31,7 @@ import { GoalDetailComponent } from './goals/goal/goal-detail/goal-detail.compon
 import { InvitationsComponent } from './friends/incoming-invitations/invitations.component';
 import { FriendRequestComponent } from './friends/incoming-invitations/friend-request/friend-request.component';
 import { GoalInvitationComponent } from './friends/incoming-invitations/goal-invitation/goal-invitation.component';
+import { HistoryComponent } from './history/history.component';
 
 Amplify.configure({
   Auth: {
@@ -66,7 +67,8 @@ Amplify.configure({
     GoalDetailComponent,
     InvitationsComponent,
     FriendRequestComponent,
-    GoalInvitationComponent
+    GoalInvitationComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
