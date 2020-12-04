@@ -3,6 +3,26 @@
 .calendar-wrapper {
   padding: 20px;
   max-width: 1040px;
+  margin: auto;
+}
+
+.calendar-header {
+  margin-top: 16px;
+  margin-bottom: 24px;
+
+  .month-name {
+    margin-top: 10px;
+    margin-left: 40px;
+    font-size: 24px;
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+}
+
+.title-template {
+  display: inline-block;
+  padding: 12px 0 12px 0;
+  font-size: 18px;
 }
 
 .event-details {
@@ -12,17 +32,13 @@
 .event-details-times {
   display: inline-block;
   padding-left: 8px;
+  font-size: 16px;
 }
 
 .event-details-goal-name {
   display: inline-block;
-  padding: 16px 6px 16px 12px;
-  font-size: 18px;
+  padding: 0 6px 0 12px;
 }
-
-// #d9d9d9 bardzo jasny
-// #424242 jasny
-// #303030 ciemny
 
 // First define some global color variables for your app, these are just for the demo, they can be anything you like
 $bg-dark-primary: #303030;

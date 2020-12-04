@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CalendarEvent } from 'angular-calendar';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
+import { isSameDay, isSameMonth } from 'date-fns';
 
 import { HistoryService } from './history.service';
 import { GoalEvent } from './history-data.model';
@@ -39,6 +39,7 @@ export class HistoryComponent implements OnInit, OnDestroy {
   calendarEvents: CalendarEvent[] = [];
   activeDayIsOpen = true;
   locale = 'pl';
+  view: CalendarView = CalendarView.Month;
 
   eventsChangedSub: Subscription;
 
@@ -70,8 +71,13 @@ export class HistoryComponent implements OnInit, OnDestroy {
     for (const goalEvent of goalEvents) {
       const goalInfo = goalEvent.goalInfo;
       for (const event of goalEvent.events) {
+        const titleTemplate = `<div class="title-template">
+                                 <div class="event-details-times">${event.times}x</div>
+                                 <div class="event-details-goal-name">${goalInfo.goalName}</div>
+                                 <i class="${goalInfo.icon}"></i>
+                               </div>`;
         calendarEvents.push({
-          title: `<div class="event-details-times">${event.times}x</div> <div class="event-details-goal-name">${goalInfo.goalName}</div> <i class="${goalInfo.icon}"></i>`,
+          title: titleTemplate,
           color: HistoryComponent.chooseColor(goalInfo.type),
           start: event.parsedDate,
           cssClass: 'event-details',
@@ -91,7 +97,10 @@ export class HistoryComponent implements OnInit, OnDestroy {
       }
       this.viewDate = date;
     }
+  }
 
+  closeOpenMonthViewDay(): void {
+    this.activeDayIsOpen = false;
   }
 
   ngOnDestroy(): void {

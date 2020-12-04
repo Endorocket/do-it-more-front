@@ -1,4 +1,43 @@
 <section class="calendar-wrapper">
+
+  <div class="calendar-header" fxLayout="row" fxLayoutAlign="space-between">
+    <div class="month-name">{{ viewDate | calendarDate:('month' + 'ViewTitle'):locale }}</div>
+
+    <mat-button-toggle-group name="monthSwitcher" aria-label="Month Switcher">
+      <mat-button-toggle>
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Poprzedni
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Obecny miesiąc
+        </div>
+      </mat-button-toggle>
+      <mat-button-toggle>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Następny
+        </div>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
   <mwl-calendar-month-view
     [viewDate]="viewDate"
     [locale]="locale"
