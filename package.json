@@ -22,7 +22,9 @@
     "@angular/platform-browser": "~10.1.5",
     "@angular/platform-browser-dynamic": "~10.1.5",
     "@angular/router": "~10.1.5",
+    "angular-calendar": "^0.28.22",
     "aws-amplify": "^3.3.10",
+    "date-fns": "^2.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -1,0 +1,47 @@
+@import '~angular-calendar/scss/angular-calendar.scss';
+
+.calendar-wrapper {
+  padding: 20px;
+  max-width: 1040px;
+}
+
+.event-details {
+  font-size: 18px;
+}
+
+.event-details-times {
+  display: inline-block;
+  padding-left: 8px;
+}
+
+.event-details-goal-name {
+  display: inline-block;
+  padding: 16px 6px 16px 12px;
+  font-size: 18px;
+}
+
+// #d9d9d9 bardzo jasny
+// #424242 jasny
+// #303030 ciemny
+
+// First define some global color variables for your app, these are just for the demo, they can be anything you like
+$bg-dark-primary: #303030;
+$bg-dark-secondary: #424242;
+$text-color: #FFF;
+$border-color: #7e7682;
+
+// Call the calendar mixin with a sass color map of your theme. Every property is optional.
+// For a list of all variables and how they are used,
+// see https://github.com/mattlewis92/angular-calendar/tree/master/projects/angular-calendar/src/variables.scss
+@include cal-theme(
+    (
+      bg-primary: $bg-dark-primary,
+      bg-secondary: $bg-dark-primary,
+      weekend-color: indianred,
+      bg-active: $bg-dark-secondary,
+      border-color: $border-color,
+      gray: $bg-dark-secondary,
+      today-bg: $bg-dark-secondary,
+      event-color-primary: $bg-dark-secondary,
+    )
+);

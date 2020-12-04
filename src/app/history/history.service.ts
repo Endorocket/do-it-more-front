@@ -41,7 +41,7 @@ export class HistoryService {
           const strings = event.date.split('-');
           return {
             date: event.date,
-            parsedDate: new Date(+strings[0], +strings[1], +strings[2]),
+            parsedDate: new Date(+strings[0], +strings[1] - 1, +strings[2]),
             times: event.times
           } as EventData;
         });

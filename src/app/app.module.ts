@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { Amplify } from 'aws-amplify';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -78,7 +80,8 @@ Amplify.configure({
     FlexLayoutModule,
     MaterialModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CalendarModule.forRoot({provide: DateAdapter, useFactory: adapterFactory})
   ],
   entryComponents: [
     NewFriendComponent,
