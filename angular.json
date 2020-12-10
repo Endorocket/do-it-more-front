@@ -25,6 +25,7 @@
             ],
             "styles": [
               "node_modules/angular-calendar/css/angular-calendar.css",
+              "src/theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -54,7 +55,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumError": "15kb"
                 }
               ]
             }
