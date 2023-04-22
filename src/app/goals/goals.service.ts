@@ -31,10 +31,10 @@ export class GoalsService {
   async addGoal(goal: Goal): Promise<void> {
     const idToken = await AuthService.getIdToken();
     const frequency = goal.frequency === Frequency.MONTHLY ? 'MONTHLY' : goal.frequency === Frequency.WEEKLY ? 'WEEKLY' : 'DAILY';
-    this.http.post(environment.apiUrl + '/goals',
+    this.http.post(environment.apiUrl + '/goals?username=endorocket',
       {
-        goalName: goal.name,
-        goalType: goal.type.name,
+        name: goal.name,
+        type: goal.type.name,
         icon: goal.icon,
         frequency,
         totalTimes: goal.totalTimes,
@@ -157,12 +157,8 @@ export class GoalsService {
     }
     console.log('fetchUserAndGoalsData FETCHED');
     const idToken = await AuthService.getIdToken();
-    this.http.get<UserAndGoalsData>(environment.apiUrl + '/user',
-      {
-        headers: {
-          Authorization: idToken
-        }
-      }).subscribe(data => {
+    this.http.get<UserAndGoalsData>(environment.apiUrl + '/user?username=endorocket')
+      .subscribe(data => {
       console.log(data);
       data.progress.forEach(progress => {
         console.log(progress.type);

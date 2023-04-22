@@ -4,7 +4,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { Amplify } from 'aws-amplify';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
@@ -34,16 +33,6 @@ import { InvitationsComponent } from './friends/incoming-invitations/invitations
 import { FriendRequestComponent } from './friends/incoming-invitations/friend-request/friend-request.component';
 import { GoalInvitationComponent } from './friends/incoming-invitations/goal-invitation/goal-invitation.component';
 import { HistoryComponent } from './history/history.component';
-
-Amplify.configure({
-  Auth: {
-    mandatorySignIn: true,
-    region: 'eu-central-1',
-    userPoolId: 'eu-central-1_KB4rWDaWw',
-    userPoolWebClientId: '5oq2m7qblv38s5t61fi4lvno70',
-    authenticationFlowType: 'USER_PASSWORD_AUTH'
-  }
-});
 
 @NgModule({
   declarations: [
