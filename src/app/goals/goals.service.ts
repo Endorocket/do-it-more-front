@@ -129,12 +129,12 @@ export class GoalsService {
     ];
   }
 
-  async updateGoal(change: number, goalId: string): Promise<void> {
-    const updatedGoal = this.goals.find(goal => goal.id === goalId);
+  async updateGoal(change: number, goalName: string): Promise<void> {
+    const updatedGoal = this.goals.find(goal => goal.name === goalName);
     updatedGoal.doneTimes += change;
 
     const idToken = await AuthService.getIdToken();
-    this.http.patch(`${environment.apiUrl}/goals/${goalId}`,
+    this.http.patch(`${environment.apiUrl}/goals/${goalName}?username=endorocket`,
       {
         times: change
       },
@@ -143,7 +143,7 @@ export class GoalsService {
           Authorization: idToken
         }
       }).subscribe(data => {
-      console.log(data);
+        this.fetchUserAndGoalsData(true);
     }, error => {
       console.log(error);
     });

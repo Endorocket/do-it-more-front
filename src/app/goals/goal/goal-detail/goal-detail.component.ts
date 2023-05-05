@@ -37,7 +37,7 @@ export class GoalDetailComponent implements OnInit {
   }
 
   onConfirmClick(): void {
-    this.goalsService.updateGoal(this.change, this.goal.id);
-    this.userService.updatePoints(this.points, this.goal.type);
+    this.goalsService.updateGoal(this.change, this.goal.name);
+    // this.userService.updatePoints(this.points, this.goal.type);
   }
 }
